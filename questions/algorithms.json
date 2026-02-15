@@ -10,7 +10,8 @@
         "O(n²)",
         "O(1)"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["algorithms"]
     },
     {
@@ -23,7 +24,8 @@
         "Timsort",
         "Merge Sort"
       ],
-      "answerScores": [0.3, 0, 1, 0.5],
+      "answerScores": [0.5, -0.33, 1, 0.5],
+      "multipleChoice": false,
       "topics": ["algorithms"]
     },
     {
@@ -36,7 +38,8 @@
         "Brute Force",
         "Backtracking"
       ],
-      "answerScores": [0.2, 1, 0, 0.3],
+      "answerScores": [-0.33, 1, -0.33, 0.5],
+      "multipleChoice": false,
       "topics": ["algorithms"]
     },
     {
@@ -50,7 +53,8 @@
         "8",
         "13"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["algorithms"]
     },
     {
@@ -63,7 +67,8 @@
         "O(n²)",
         "O(log n)"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["algorithms"]
     },
     {
@@ -77,7 +82,8 @@
         "Maximum value in list",
         "Length of list"
       ],
-      "answerScores": [0, 0, 1, 0],
+      "answerScores": [-0.33, -0.33, 1, -0.33],
+      "multipleChoice": false,
       "topics": ["algorithms"]
     }
   ]

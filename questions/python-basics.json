@@ -10,7 +10,8 @@
         "get_input()",
         "read()"
       ],
-      "answerScores": [1, 0.3, 0, 0],
+      "answerScores": [1, 0.5, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["python-basics"]
     },
     {
@@ -23,7 +24,8 @@
         "func",
         "define"
       ],
-      "answerScores": [0, 1, 0, 0.2],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["python-basics"]
     },
     {
@@ -37,7 +39,8 @@
         "7",
         "Error"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["python-basics"]
     },
     {
@@ -50,7 +53,8 @@
         "Pauses the loop",
         "Restarts the loop"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["python-basics"]
     },
     {
@@ -64,7 +68,8 @@
         "1\n2",
         "0\n1"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["python-basics"]
     },
     {
@@ -77,7 +82,8 @@
         "To define class names",
         "To name variables"
       ],
-      "answerScores": [0.4, 1, 0, 0],
+      "answerScores": [0.5, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["python-basics"]
     },
     {
@@ -90,7 +96,8 @@
         "variable-name",
         "variable name"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["python-basics"]
     },
     {
@@ -104,7 +111,8 @@
         "5",
         "Error"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["python-basics"]
     },
     {
@@ -117,7 +125,8 @@
         "7six",
         "test-variable"
       ],
-      "answerScores": [0.5, 0.5, -0.7, -0.3],
+      "answerScores": [0.5, 0.5, -0.5, -0.5],
+      "multipleChoice": true,
       "topics": ["python-basics"]
     }
   ]

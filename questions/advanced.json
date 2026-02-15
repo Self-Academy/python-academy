@@ -11,7 +11,8 @@
         "[0, 2, 4]",
         "[1, 9]"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["advanced"]
     },
     {
@@ -24,7 +25,8 @@
         "A function that modifies global variables",
         "A function that handles exceptions"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["advanced"]
     },
     {
@@ -38,7 +40,8 @@
         "30",
         "Error"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["advanced"]
     },
     {
@@ -51,7 +54,8 @@
         "'is' compares values, '==' compares identity",
         "'==' is for numbers, 'is' is for strings"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["advanced"]
     },
     {
@@ -64,7 +68,8 @@
         "A function that can change the behavior of another function by wrapping it",
         "A filetype like CSS for HTML"
       ],
-      "answerScores": [0, 0.6, 1, 0],
+      "answerScores": [-0.33, 0.5, 1, -0.33],
+      "multipleChoice": false,
       "topics": ["advanced"]
     },
     {
@@ -78,7 +83,8 @@
         "0\n1\n2\n3",
         "3"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["advanced"]
     }
   ]

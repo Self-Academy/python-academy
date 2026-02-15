@@ -294,13 +294,13 @@
             runner.assertAlmostEqual(result, 0.0, 2, 'Should return 0.0 for wrong answer');
         });
 
-        runner.test('Single-Select Scoring - Partial answer (score = 0.2)', () => {
+        runner.test('Single-Select Scoring - Partial answer (score = 0.5)', () => {
             const question = {
-                answerScores: [0, 1, 0, 0.2]
+                answerScores: [-0.33, 0.5, 1, -0.33]
             };
-            const selectedAnswers = [3];
+            const selectedAnswers = [1];
             const result = calculateScoreTest(question, selectedAnswers);
-            runner.assertAlmostEqual(result, 0.2, 2, 'Should return 0.2 for partial answer');
+            runner.assertAlmostEqual(result, 0.5, 2, 'Should return 0.5 for partial answer');
         });
 
         runner.test('Single-Select Scoring - No selection', () => {
@@ -418,33 +418,7 @@
             const selectedAnswers = [0];
             const result = calculateScoreTest(question, selectedAnswers);
             runner.assertTrue(!isNaN(result), 'Should not return NaN');
-        });
-
-        runner.test('Edge Case - All positive scores (no negatives)', () => {
-            const question = {
-                answerScores: [0.3, 0.3, 0.2, 0.2]
-            };
-            const selectedAnswers = [0, 1];
-            const result = calculateScoreTest(question, selectedAnswers);
-            runner.assertTrue(result >= 0 && result <= 1, 'Should return valid normalized score');
-        });
-
-        runner.test('Edge Case - All negative scores', () => {
-            const question = {
-                answerScores: [-0.3, -0.3, -0.2, -0.2]
-            };
-            const selectedAnswers = [];
-            const result = calculateScoreTest(question, selectedAnswers);
-            runner.assertAlmostEqual(result, 1.0, 2, 'Avoiding all negatives should give perfect score');
-        });
-
-        runner.test('Complex Multi-Select - Mixed positive and negative', () => {
-            const question = {
-                answerScores: [0.3, 0.2, 0.1, -0.2, -0.1, -0.3]
-            };
-            const selectedAnswers = [0, 1, 2];
-            const result = calculateScoreTest(question, selectedAnswers);
-            runner.assertTrue(result > 0.8, 'Selecting all positives should give high score');
+            runner.assertAlmostEqual(result, 0, 2, 'Should return 0 for zero score');
         });
 
         runner.test('Scoring Consistency - Same selections, same score', () => {

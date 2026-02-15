@@ -10,7 +10,8 @@
         "To create a class variable",
         "To import modules"
       ],
-      "answerScores": [0, 1, 0.3, 0],
+      "answerScores": [-0.33, 1, 0.5, -0.33],
+      "multipleChoice": false,
       "topics": ["oop"]
     },
     {
@@ -24,7 +25,8 @@
         "Buddy says Woof!",
         "Error"
       ],
-      "answerScores": [0, 0, 1, 0],
+      "answerScores": [-0.33, -0.33, 1, -0.33],
+      "multipleChoice": false,
       "topics": ["oop"]
     },
     {
@@ -37,7 +39,8 @@
         "Hiding data from other classes",
         "Running code in parallel"
       ],
-      "answerScores": [0.2, 1, 0.4, 0],
+      "answerScores": [-0.33, 1, 0.5, -0.33],
+      "multipleChoice": false,
       "topics": ["oop"]
     },
     {
@@ -51,7 +54,8 @@
         "None",
         "Error"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["oop"]
     },
     {
@@ -64,7 +68,8 @@
         "Creating multiple classes",
         "Importing external modules"
       ],
-      "answerScores": [0, 1, 0.3, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["oop"]
     },
     {
@@ -78,7 +83,8 @@
         "2",
         "Error"
       ],
-      "answerScores": [0, 0, 1, 0],
+      "answerScores": [-0.33, -0.33, 1, -0.33],
+      "multipleChoice": false,
       "topics": ["oop"]
     }
   ]
