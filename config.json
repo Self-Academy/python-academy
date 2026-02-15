@@ -1,0 +1,49 @@
+{
+  "defaultQuestions": 10,
+  "topics": [
+    {
+      "id": "io",
+      "name": "Input/Output",
+      "icon": "📝"
+    },
+    {
+      "id": "exceptions",
+      "name": "Exception Handling",
+      "icon": "⚠️"
+    },
+    {
+      "id": "oop",
+      "name": "Object-Oriented Programming",
+      "icon": "🏗️"
+    },
+    {
+      "id": "data-structures",
+      "name": "Data Structures",
+      "icon": "📊"
+    },
+    {
+      "id": "functions",
+      "name": "Functions & Scope",
+      "icon": "🔧"
+    },
+    {
+      "id": "control-flow",
+      "name": "Control Flow",
+      "icon": "🔀"
+    },
+    {
+      "id": "modules",
+      "name": "Modules & Packages",
+      "icon": "📦"
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced Concepts",
+      "icon": "🚀"
+    }
+  ],
+  "questionFiles": [
+    "questions.json"
+  ]
+}
+

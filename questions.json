@@ -1,0 +1,342 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "Theory",
+      "question": "What function is used to get user input from the console in Python 3?",
+      "answers": [
+        "input()",
+        "raw_input()",
+        "get_input()",
+        "read()"
+      ],
+      "correctAnswer": 0,
+      "topics": ["io"]
+    },
+    {
+      "id": 2,
+      "type": "Code Analysis",
+      "question": "What will be printed by this code?",
+      "code": "x = 5\ny = 10\nx, y = y, x\nprint(x, y)",
+      "answers": [
+        "5 10",
+        "10 5",
+        "10 10",
+        "5 5"
+      ],
+      "correctAnswer": 1,
+      "topics": ["io", "data-structures"]
+    },
+    {
+      "id": 3,
+      "type": "Theory",
+      "question": "Which exception is raised when you try to access a dictionary key that doesn't exist?",
+      "answers": [
+        "KeyError",
+        "ValueError",
+        "IndexError",
+        "AttributeError"
+      ],
+      "correctAnswer": 0,
+      "topics": ["exceptions", "data-structures"]
+    },
+    {
+      "id": 4,
+      "type": "Code Analysis",
+      "question": "What will this code output?",
+      "code": "try:\n    result = 10 / 0\nexcept ZeroDivisionError:\n    print(\"Error!\")\nfinally:\n    print(\"Done\")",
+      "answers": [
+        "Error!",
+        "Done",
+        "Error!\nDone",
+        "No output"
+      ],
+      "correctAnswer": 2,
+      "topics": ["exceptions", "control-flow"]
+    },
+    {
+      "id": 5,
+      "type": "Theory",
+      "question": "What is the purpose of the __init__ method in a Python class?",
+      "answers": [
+        "To delete an object",
+        "To initialize object attributes",
+        "To create a class variable",
+        "To import modules"
+      ],
+      "correctAnswer": 1,
+      "topics": ["oop"]
+    },
+    {
+      "id": 6,
+      "type": "Code Analysis",
+      "question": "What will be the output of this code?",
+      "code": "class Dog:\n    def __init__(self, name):\n        self.name = name\n    \n    def speak(self):\n        return f\"{self.name} says Woof!\"\n\ndog = Dog(\"Buddy\")\nprint(dog.speak())",
+      "answers": [
+        "Woof!",
+        "Buddy",
+        "Buddy says Woof!",
+        "Error"
+      ],
+      "correctAnswer": 2,
+      "topics": ["oop", "functions"]
+    },
+    {
+      "id": 7,
+      "type": "Theory",
+      "question": "Which of the following data structures is immutable in Python?",
+      "answers": [
+        "List",
+        "Dictionary",
+        "Set",
+        "Tuple"
+      ],
+      "correctAnswer": 3,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 8,
+      "type": "Code Analysis",
+      "question": "What is the output of this code?",
+      "code": "my_list = [1, 2, 3, 4, 5]\nprint(my_list[1:4])",
+      "answers": [
+        "[1, 2, 3]",
+        "[2, 3, 4]",
+        "[2, 3, 4, 5]",
+        "[1, 2, 3, 4]"
+      ],
+      "correctAnswer": 1,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 9,
+      "type": "Theory",
+      "question": "What keyword is used to define a function in Python?",
+      "answers": [
+        "function",
+        "def",
+        "func",
+        "define"
+      ],
+      "correctAnswer": 1,
+      "topics": ["functions"]
+    },
+    {
+      "id": 10,
+      "type": "Code Analysis",
+      "question": "What will this function return?",
+      "code": "def multiply(a, b=2):\n    return a * b\n\nresult = multiply(5)\nprint(result)",
+      "answers": [
+        "5",
+        "10",
+        "7",
+        "Error"
+      ],
+      "correctAnswer": 1,
+      "topics": ["functions"]
+    },
+    {
+      "id": 11,
+      "type": "Theory",
+      "question": "What does the 'break' statement do in a loop?",
+      "answers": [
+        "Skips to the next iteration",
+        "Exits the loop completely",
+        "Pauses the loop",
+        "Restarts the loop"
+      ],
+      "correctAnswer": 1,
+      "topics": ["control-flow"]
+    },
+    {
+      "id": 12,
+      "type": "Code Analysis",
+      "question": "What will be printed?",
+      "code": "for i in range(3):\n    if i == 1:\n        continue\n    print(i)",
+      "answers": [
+        "0\n1\n2",
+        "0\n2",
+        "1\n2",
+        "0\n1"
+      ],
+      "correctAnswer": 1,
+      "topics": ["control-flow"]
+    },
+    {
+      "id": 13,
+      "type": "Theory",
+      "question": "What is the purpose of the '__name__' variable in Python?",
+      "answers": [
+        "To store the program name",
+        "To check if a script is run directly or imported",
+        "To define class names",
+        "To name variables"
+      ],
+      "correctAnswer": 1,
+      "topics": ["modules"]
+    },
+    {
+      "id": 14,
+      "type": "Theory",
+      "question": "Which statement is used to import a specific function from a module?",
+      "answers": [
+        "import module.function",
+        "from module import function",
+        "include module.function",
+        "using module.function"
+      ],
+      "correctAnswer": 1,
+      "topics": ["modules"]
+    },
+    {
+      "id": 15,
+      "type": "Code Analysis",
+      "question": "What will this list comprehension produce?",
+      "code": "result = [x**2 for x in range(5) if x % 2 == 0]\nprint(result)",
+      "answers": [
+        "[0, 1, 4, 9, 16]",
+        "[0, 4, 16]",
+        "[0, 2, 4]",
+        "[1, 9]"
+      ],
+      "correctAnswer": 1,
+      "topics": ["advanced", "data-structures"]
+    },
+    {
+      "id": 16,
+      "type": "Theory",
+      "question": "What is a lambda function in Python?",
+      "answers": [
+        "A function that runs in parallel",
+        "An anonymous function defined with lambda keyword",
+        "A function that modifies global variables",
+        "A function that handles exceptions"
+      ],
+      "correctAnswer": 1,
+      "topics": ["advanced", "functions"]
+    },
+    {
+      "id": 17,
+      "type": "Code Analysis",
+      "question": "What is the output?",
+      "code": "def outer():\n    x = 10\n    def inner():\n        nonlocal x\n        x = 20\n    inner()\n    return x\n\nprint(outer())",
+      "answers": [
+        "10",
+        "20",
+        "30",
+        "Error"
+      ],
+      "correctAnswer": 1,
+      "topics": ["functions", "advanced"]
+    },
+    {
+      "id": 18,
+      "type": "Theory",
+      "question": "What does inheritance allow in object-oriented programming?",
+      "answers": [
+        "Creating multiple instances of a class",
+        "A class to inherit properties and methods from another class",
+        "Hiding data from other classes",
+        "Running code in parallel"
+      ],
+      "correctAnswer": 1,
+      "topics": ["oop"]
+    },
+    {
+      "id": 19,
+      "type": "Code Analysis",
+      "question": "What will be printed?",
+      "code": "class Animal:\n    def __init__(self):\n        self.sound = \"generic\"\n\nclass Cat(Animal):\n    def __init__(self):\n        super().__init__()\n        self.sound = \"meow\"\n\ncat = Cat()\nprint(cat.sound)",
+      "answers": [
+        "generic",
+        "meow",
+        "None",
+        "Error"
+      ],
+      "correctAnswer": 1,
+      "topics": ["oop"]
+    },
+    {
+      "id": 20,
+      "type": "Multiple Select",
+      "question": "Which of the following are valid ways to handle exceptions in Python? (Select all that apply)",
+      "answers": [
+        "try-except",
+        "try-catch",
+        "try-except-finally",
+        "try-except-else"
+      ],
+      "correctAnswers": [0, 2, 3],
+      "topics": ["exceptions"]
+    },
+    {
+      "id": 21,
+      "type": "Code Analysis",
+      "question": "What will this code output?",
+      "code": "my_dict = {'a': 1, 'b': 2, 'c': 3}\nfor key, value in my_dict.items():\n    if value == 2:\n        break\n    print(key, value)",
+      "answers": [
+        "a 1\nb 2\nc 3",
+        "a 1",
+        "b 2",
+        "a 1\nc 3"
+      ],
+      "correctAnswer": 1,
+      "topics": ["data-structures", "control-flow"]
+    },
+    {
+      "id": 22,
+      "type": "Theory",
+      "question": "What is the difference between '==' and 'is' in Python?",
+      "answers": [
+        "They are the same",
+        "'==' compares values, 'is' compares identity (memory location)",
+        "'is' compares values, '==' compares identity",
+        "'==' is for numbers, 'is' is for strings"
+      ],
+      "correctAnswer": 1,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 23,
+      "type": "Code Analysis",
+      "question": "What is the result?",
+      "code": "with open('test.txt', 'w') as f:\n    f.write('Hello')\n    # File automatically closes here\nprint('File closed:', f.closed)",
+      "answers": [
+        "File closed: False",
+        "File closed: True",
+        "Error",
+        "No output"
+      ],
+      "correctAnswer": 1,
+      "topics": ["io", "exceptions"]
+    },
+    {
+      "id": 24,
+      "type": "Theory",
+      "question": "What is a decorator in Python?",
+      "answers": [
+        "A function that modifies another function",
+        "A way to decorate strings",
+        "A type of comment",
+        "A module for styling output"
+      ],
+      "correctAnswer": 0,
+      "topics": ["advanced", "functions"]
+    },
+    {
+      "id": 25,
+      "type": "Code Analysis",
+      "question": "What does this generator produce?",
+      "code": "def countdown(n):\n    while n > 0:\n        yield n\n        n -= 1\n\nfor i in countdown(3):\n    print(i)",
+      "answers": [
+        "1\n2\n3",
+        "3\n2\n1",
+        "0\n1\n2\n3",
+        "3"
+      ],
+      "correctAnswer": 1,
+      "topics": ["advanced", "functions", "control-flow"]
+    }
+  ]
+}
+
