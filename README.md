@@ -4,11 +4,23 @@ Test your Python knowledge on different concepts and evaluate where you are at!
 
 ## Features
 
-- 📝 Interactive web-based test with multiple question types (theory and code analysis)
-- 🎯 Multiple Python topics covered: I/O, Exception Handling, OOP, Data Structures, Functions, Control Flow, Modules, and Advanced Concepts
+- 📝 Interactive web-based test with multiple question types (theory, code analysis, and multiple select)
+- 🎯 Seven Python topics covered:
+  - Object Oriented Programming
+  - Python Basics
+  - Exception Handling
+  - Data Structures
+  - Advanced Python Concepts
+  - Algorithms
+  - Standard Library
 - 📊 Detailed score breakdown by topic with personalized feedback
-- 🔀 Random question selection from a pool of questions
-- ⚙️ Configurable number of questions per test
+- 🔀 Smart question selection algorithm:
+  - Automatically generates tests with at least 5 questions per topic
+  - Minimum 10 questions total
+  - Questions from different topics are intelligently mixed for better learning
+- 📋 Interactive timeline feature:
+  - Visual overview of all answers (correct, partial, incorrect)
+  - Click any question to review the question, your answer, and the correct answer
 - 📱 Responsive design that works on all devices
 - 🚀 Easy to deploy with GitHub Pages
 
@@ -22,9 +34,29 @@ Visit the live test at: `https://[your-username].github.io/python-academy/`
 2. Open `index.html` in your web browser
 3. Start testing your Python knowledge!
 
+## Project Structure
+
+```
+python-academy/
+├── index.html          # Main HTML file
+├── app.js             # Application logic
+├── styles.css         # Styling
+├── config.json        # Configuration (topics, settings)
+├── questions/         # Question files organized by topic
+│   ├── oop.json
+│   ├── python-basics.json
+│   ├── exception-handling.json
+│   ├── data-structures.json
+│   ├── advanced.json
+│   ├── algorithms.json
+│   ├── standard-library.json
+│   └── mixed.json     # Questions covering multiple topics
+└── README.md
+```
+
 ## Adding More Questions
 
-Questions are stored in JSON files for easy management. To add more questions:
+Questions are organized by topic in separate JSON files within the `questions/` directory. To add more questions:
 
 1. Edit `questions.json` or create a new question file
 2. Follow this format:

@@ -4,11 +4,12 @@ class PythonAcademy {
     constructor() {
         this.config = null;
         this.questions = [];
+        this.questionsByTopic = {};
         this.currentQuestionIndex = 0;
         this.selectedQuestions = [];
         this.userAnswers = [];
+        this.answerDetails = [];
         this.topicScores = {};
-        this.numQuestions = 10;
 
         this.initializeApp();
     }
@@ -28,12 +29,11 @@ class PythonAcademy {
     async loadConfig() {
         const response = await fetch('config.json');
         this.config = await response.json();
-        this.numQuestions = this.config.defaultQuestions || 10;
-        document.getElementById('num-questions').value = this.numQuestions;
 
-        // Initialize topic scores
+        // Initialize topic scores and questionsByTopic
         this.config.topics.forEach(topic => {
             this.topicScores[topic.id] = { score: 0, total: 0 };
+            this.questionsByTopic[topic.id] = [];
         });
     }
 
@@ -45,6 +45,15 @@ class PythonAcademy {
                 const response = await fetch(file);
                 const data = await response.json();
                 this.questions.push(...data.questions);
+
+                // Organize questions by topic
+                data.questions.forEach(q => {
+                    q.topics.forEach(topicId => {
+                        if (this.questionsByTopic[topicId]) {
+                            this.questionsByTopic[topicId].push(q);
+                        }
+                    });
+                });
             } catch (error) {
                 console.warn(`Could not load ${file}:`, error);
             }
@@ -70,21 +79,15 @@ class PythonAcademy {
         document.getElementById('start-btn').addEventListener('click', () => this.startTest());
         document.getElementById('submit-answer-btn').addEventListener('click', () => this.submitAnswer());
         document.getElementById('restart-btn').addEventListener('click', () => this.restartTest());
-
-        document.getElementById('num-questions').addEventListener('change', (e) => {
-            this.numQuestions = parseInt(e.target.value);
-        });
+        document.getElementById('toggle-timeline-btn').addEventListener('click', () => this.toggleTimeline());
     }
 
     startTest() {
-        // Get number of questions from input
-        const numQuestionsInput = document.getElementById('num-questions');
-        this.numQuestions = Math.min(parseInt(numQuestionsInput.value), this.questions.length);
-
-        // Select random questions
-        this.selectedQuestions = this.getRandomQuestions(this.numQuestions);
+        // Generate questions using smart selection algorithm
+        this.selectedQuestions = this.generateQuestionList();
         this.currentQuestionIndex = 0;
         this.userAnswers = [];
+        this.answerDetails = [];
 
         // Reset scores
         Object.keys(this.topicScores).forEach(key => {
@@ -93,20 +96,83 @@ class PythonAcademy {
 
         // Show question screen
         this.switchScreen('question-screen');
-        document.getElementById('total-questions').textContent = this.numQuestions;
+        document.getElementById('total-questions').textContent = this.selectedQuestions.length;
         this.displayQuestion();
     }
 
-    getRandomQuestions(num) {
-        const shuffled = [...this.questions].sort(() => Math.random() - 0.5);
-        return shuffled.slice(0, num);
+    generateQuestionList() {
+        const minPerTopic = this.config.minQuestionsPerTopic || 5;
+        const minTotal = this.config.minTotalQuestions || 10;
+        const selectedQuestions = [];
+        const usedQuestionIds = new Set();
+
+        // Step 1: Ensure minimum questions per topic
+        this.config.topics.forEach(topic => {
+            const topicQuestions = this.questionsByTopic[topic.id] || [];
+            const shuffled = [...topicQuestions].sort(() => Math.random() - 0.5);
+
+            let added = 0;
+            for (const q of shuffled) {
+                if (!usedQuestionIds.has(q.id) && added < minPerTopic) {
+                    selectedQuestions.push(q);
+                    usedQuestionIds.add(q.id);
+                    added++;
+                }
+            }
+        });
+
+        // Step 2: Add more questions if below minimum total
+        const remainingQuestions = this.questions.filter(q => !usedQuestionIds.has(q.id));
+        const shuffledRemaining = [...remainingQuestions].sort(() => Math.random() - 0.5);
+
+        while (selectedQuestions.length < minTotal && shuffledRemaining.length > 0) {
+            const q = shuffledRemaining.pop();
+            selectedQuestions.push(q);
+            usedQuestionIds.add(q.id);
+        }
+
+        // Step 3: Shuffle to avoid same topics in a row (while maintaining some diversity)
+        return this.shuffleWithTopicDiversity(selectedQuestions);
+    }
+
+    shuffleWithTopicDiversity(questions) {
+        // Try to avoid consecutive questions from the same single topic
+        const result = [];
+        const remaining = [...questions];
+        let lastTopic = null;
+
+        while (remaining.length > 0) {
+            let bestIndex = -1;
+
+            // Try to find a question with a different primary topic
+            for (let i = 0; i < remaining.length; i++) {
+                const q = remaining[i];
+                const primaryTopic = q.topics[0];
+
+                if (primaryTopic !== lastTopic) {
+                    bestIndex = i;
+                    break;
+                }
+            }
+
+            // If all remaining are same topic or we couldn't find different, just take first
+            if (bestIndex === -1) {
+                bestIndex = 0;
+            }
+
+            const selected = remaining.splice(bestIndex, 1)[0];
+            result.push(selected);
+            lastTopic = selected.topics[0];
+        }
+
+        return result;
     }
 
     displayQuestion() {
         const question = this.selectedQuestions[this.currentQuestionIndex];
 
         // Update progress
-        const progress = ((this.currentQuestionIndex + 1) / this.numQuestions) * 100;
+        const progress = ((this.currentQuestionIndex + 1) / this.selectedQuestions.length) * 100;
         document.getElementById('progress-fill').style.width = `${progress}%`;
         document.getElementById('current-question').textContent = this.currentQuestionIndex + 1;
 
