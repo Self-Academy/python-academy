@@ -223,27 +223,23 @@ class PythonAcademy {
             label.htmlFor = `answer-${index}`;
             label.textContent = answer;
 
-            // Make the entire option div clickable
             optionDiv.addEventListener('click', (e) => {
-                // Prevent event bubbling if clicking on input or label
                 if (e.target === input || e.target === label) {
                     return;
                 }
 
                 if (inputType === 'radio') {
-                    // For radio buttons, select this option and deselect others
                     input.checked = true;
                     document.querySelectorAll('.answer-option').forEach(opt => {
                         opt.classList.remove('selected');
                     });
                     optionDiv.classList.add('selected');
-                } else {
-                    // For checkboxes, toggle this option
-                    input.checked = !input.checked;
-                    optionDiv.classList.toggle('selected', input.checked);
+                    document.getElementById('submit-answer-btn').disabled = false;
+                    return;
                 }
 
-                // Enable submit button
+                input.checked = !input.checked;
+                optionDiv.classList.toggle('selected', input.checked);
                 document.getElementById('submit-answer-btn').disabled = false;
             });
 
@@ -253,6 +249,8 @@ class PythonAcademy {
                         opt.classList.remove('selected');
                     });
                     optionDiv.classList.add('selected');
+                } else {
+                    optionDiv.classList.toggle('selected', input.checked);
                 }
                 document.getElementById('submit-answer-btn').disabled = false;
             });
@@ -261,10 +259,6 @@ class PythonAcademy {
                 e.preventDefault();
                 input.checked = !input.checked;
                 input.dispatchEvent(new Event('change'));
-
-                if (inputType === 'checkbox') {
-                    optionDiv.classList.toggle('selected', input.checked);
-                }
             });
 
             optionDiv.appendChild(input);
