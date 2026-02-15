@@ -188,13 +188,24 @@ class PythonAcademy {
         this.userAnswers.push(selectedAnswers);
 
         // Check if answer is correct
-        const isCorrect = this.checkAnswer(question, selectedAnswers);
+        const correctAnswers = question.correctAnswers || [question.correctAnswer];
+        const isFullyCorrect = this.checkAnswer(question, selectedAnswers);
+        const isPartiallyCorrect = this.checkPartialAnswer(question, selectedAnswers);
+
+        // Store detailed answer info for timeline
+        this.answerDetails.push({
+            question: question,
+            userAnswers: selectedAnswers,
+            correctAnswers: correctAnswers,
+            isFullyCorrect: isFullyCorrect,
+            isPartiallyCorrect: isPartiallyCorrect
+        });
 
         // Update scores for all topics this question contributes to
         question.topics.forEach(topicId => {
             if (this.topicScores[topicId]) {
                 this.topicScores[topicId].total += 1;
-                if (isCorrect) {
+                if (isFullyCorrect) {
                     this.topicScores[topicId].score += 1;
                 }
             }
@@ -217,6 +228,22 @@ class PythonAcademy {
         }
 
         return selectedAnswers.sort().every((val, index) => val === correctAnswers.sort()[index]);
+    }
+
+    checkPartialAnswer(question, selectedAnswers) {
+        const correctAnswers = question.correctAnswers || [question.correctAnswer];
+
+        // For single answer questions, there's no partial credit
+        if (correctAnswers.length === 1) {
+            return false;
+        }
+
+        // For multiple answer questions, check if some answers are correct
+        const correctCount = selectedAnswers.filter(ans => correctAnswers.includes(ans)).length;
+        const incorrectCount = selectedAnswers.filter(ans => !correctAnswers.includes(ans)).length;
+
+        // Partial if at least one correct and not all correct, and no incorrect selections
+        return correctCount > 0 && correctCount < correctAnswers.length && incorrectCount === 0;
     }
 
     showResults() {
@@ -305,6 +332,115 @@ class PythonAcademy {
             screen.classList.remove('active');
         });
         document.getElementById(screenId).classList.add('active');
+    }
+
+    toggleTimeline() {
+        const container = document.getElementById('timeline-container');
+        const toggleText = document.getElementById('timeline-toggle-text');
+
+        if (container.classList.contains('hidden')) {
+            container.classList.remove('hidden');
+            container.classList.add('visible');
+            toggleText.textContent = '📋 Hide Question Timeline';
+            this.renderTimeline();
+        } else {
+            container.classList.add('hidden');
+            container.classList.remove('visible');
+            toggleText.textContent = '📋 View Question Timeline';
+        }
+    }
+
+    renderTimeline() {
+        const circlesContainer = document.getElementById('timeline-circles');
+        circlesContainer.innerHTML = '';
+
+        this.answerDetails.forEach((detail, index) => {
+            const circle = document.createElement('div');
+            circle.className = 'timeline-circle';
+
+            if (detail.isFullyCorrect) {
+                circle.classList.add('correct');
+            } else if (detail.isPartiallyCorrect) {
+                circle.classList.add('partial');
+            } else {
+                circle.classList.add('incorrect');
+            }
+
+            circle.textContent = index + 1;
+            circle.addEventListener('click', () => this.showTimelineDetail(index));
+
+            circlesContainer.appendChild(circle);
+        });
+    }
+
+    showTimelineDetail(index) {
+        const detail = this.answerDetails[index];
+        const detailContainer = document.getElementById('timeline-detail');
+
+        // Remove active class from all circles
+        document.querySelectorAll('.timeline-circle').forEach(c => c.classList.remove('active'));
+
+        // Add active class to clicked circle
+        document.querySelectorAll('.timeline-circle')[index].classList.add('active');
+
+        const question = detail.question;
+        const correctAnswers = detail.correctAnswers;
+        const userAnswers = detail.userAnswers;
+
+        let html = `
+            <h4>Question ${index + 1}</h4>
+            <div class="question-info">
+                <span class="question-type">${question.type || 'Theory'}</span>
+                <p><strong>${question.question}</strong></p>
+        `;
+
+        if (question.code) {
+            html += `<pre class="code-block">${this.escapeHtml(question.code)}</pre>`;
+        }
+
+        html += `</div><h5>Answers:</h5><ul class="answer-list">`;
+
+        question.answers.forEach((answer, ansIndex) => {
+            const isCorrect = correctAnswers.includes(ansIndex);
+            const wasSelected = userAnswers.includes(ansIndex);
+
+            let className = '';
+            let badges = '';
+
+            if (isCorrect && wasSelected) {
+                className = 'correct-answer';
+                badges = '<span class="answer-badge badge-correct">✓ Correct</span><span class="answer-badge badge-your-answer">Your Answer</span>';
+            } else if (isCorrect && !wasSelected) {
+                className = 'correct-answer';
+                badges = '<span class="answer-badge badge-correct">✓ Correct Answer</span>';
+            } else if (!isCorrect && wasSelected) {
+                className = 'wrong-answer';
+                badges = '<span class="answer-badge badge-incorrect">✗ Wrong</span><span class="answer-badge badge-your-answer">Your Answer</span>';
+            }
+
+            html += `<li class="${className}">${this.escapeHtml(answer)} ${badges}</li>`;
+        });
+
+        html += `</ul>`;
+
+        // Add result summary
+        if (detail.isFullyCorrect) {
+            html += `<p style="color: var(--success-color); font-weight: bold; margin-top: 15px;">✓ You answered this correctly!</p>`;
+        } else if (detail.isPartiallyCorrect) {
+            html += `<p style="color: var(--warning-color); font-weight: bold; margin-top: 15px;">⚠ Partially correct - you missed some correct answers.</p>`;
+        } else {
+            html += `<p style="color: var(--danger-color); font-weight: bold; margin-top: 15px;">✗ This answer was incorrect.</p>`;
+        }
+
+        detailContainer.innerHTML = html;
+        detailContainer.classList.add('visible');
+        detailContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 
     restartTest() {

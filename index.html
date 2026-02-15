@@ -52,6 +52,23 @@
                 <h2>📊 Your Results</h2>
                 <div id="overall-score" class="overall-score"></div>
                 <div id="topic-scores" class="topic-scores"></div>
+
+                <div class="timeline-section">
+                    <button id="toggle-timeline-btn" class="btn btn-secondary">
+                        <span id="timeline-toggle-text">📋 View Question Timeline</span>
+                    </button>
+                    <div id="timeline-container" class="timeline-container hidden">
+                        <h3>Question Timeline</h3>
+                        <p class="timeline-legend">
+                            <span class="legend-item"><span class="circle correct"></span> Correct</span>
+                            <span class="legend-item"><span class="circle partial"></span> Partial</span>
+                            <span class="legend-item"><span class="circle incorrect"></span> Incorrect</span>
+                        </p>
+                        <div id="timeline-circles" class="timeline-circles"></div>
+                        <div id="timeline-detail" class="timeline-detail"></div>
+                    </div>
+                </div>
+
                 <button id="restart-btn" class="btn btn-primary">Take Test Again</button>
             </div>
         </div>

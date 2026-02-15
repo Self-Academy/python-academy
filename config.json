@@ -1,20 +1,21 @@
 {
-  "defaultQuestions": 10,
+  "minQuestionsPerTopic": 5,
+  "minTotalQuestions": 10,
   "topics": [
     {
-      "id": "io",
-      "name": "Input/Output",
-      "icon": "📝"
+      "id": "oop",
+      "name": "Object Oriented Programming",
+      "icon": "🏗️"
     },
     {
-      "id": "exceptions",
+      "id": "python-basics",
+      "name": "Python Basics",
+      "icon": "🐍"
+    },
+    {
+      "id": "exception-handling",
       "name": "Exception Handling",
       "icon": "⚠️"
-    },
-    {
-      "id": "oop",
-      "name": "Object-Oriented Programming",
-      "icon": "🏗️"
     },
     {
       "id": "data-structures",
@@ -22,28 +23,30 @@
       "icon": "📊"
     },
     {
-      "id": "functions",
-      "name": "Functions & Scope",
-      "icon": "🔧"
-    },
-    {
-      "id": "control-flow",
-      "name": "Control Flow",
-      "icon": "🔀"
-    },
-    {
-      "id": "modules",
-      "name": "Modules & Packages",
-      "icon": "📦"
-    },
-    {
       "id": "advanced",
-      "name": "Advanced Concepts",
+      "name": "Advanced Python Concepts",
       "icon": "🚀"
+    },
+    {
+      "id": "algorithms",
+      "name": "Algorithms",
+      "icon": "🔢"
+    },
+    {
+      "id": "standard-library",
+      "name": "Standard Library",
+      "icon": "📚"
     }
   ],
   "questionFiles": [
-    "questions.json"
+    "questions/oop.json",
+    "questions/python-basics.json",
+    "questions/exception-handling.json",
+    "questions/data-structures.json",
+    "questions/advanced.json",
+    "questions/algorithms.json",
+    "questions/standard-library.json",
+    "questions/mixed.json"
   ]
 }
 

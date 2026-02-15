@@ -1,0 +1,86 @@
+{
+  "questions": [
+    {
+      "id": 5,
+      "type": "Theory",
+      "question": "What is the purpose of the __init__ method in a Python class?",
+      "answers": [
+        "To delete an object",
+        "To initialize object attributes",
+        "To create a class variable",
+        "To import modules"
+      ],
+      "correctAnswer": 1,
+      "topics": ["oop"]
+    },
+    {
+      "id": 6,
+      "type": "Code Analysis",
+      "question": "What will be the output of this code?",
+      "code": "class Dog:\n    def __init__(self, name):\n        self.name = name\n    \n    def speak(self):\n        return f\"{self.name} says Woof!\"\n\ndog = Dog(\"Buddy\")\nprint(dog.speak())",
+      "answers": [
+        "Woof!",
+        "Buddy",
+        "Buddy says Woof!",
+        "Error"
+      ],
+      "correctAnswer": 2,
+      "topics": ["oop"]
+    },
+    {
+      "id": 18,
+      "type": "Theory",
+      "question": "What does inheritance allow in object-oriented programming?",
+      "answers": [
+        "Creating multiple instances of a class",
+        "A class to inherit properties and methods from another class",
+        "Hiding data from other classes",
+        "Running code in parallel"
+      ],
+      "correctAnswer": 1,
+      "topics": ["oop"]
+    },
+    {
+      "id": 19,
+      "type": "Code Analysis",
+      "question": "What will be printed?",
+      "code": "class Animal:\n    def __init__(self):\n        self.sound = \"generic\"\n\nclass Cat(Animal):\n    def __init__(self):\n        super().__init__()\n        self.sound = \"meow\"\n\ncat = Cat()\nprint(cat.sound)",
+      "answers": [
+        "generic",
+        "meow",
+        "None",
+        "Error"
+      ],
+      "correctAnswer": 1,
+      "topics": ["oop"]
+    },
+    {
+      "id": 103,
+      "type": "Theory",
+      "question": "What is encapsulation in OOP?",
+      "answers": [
+        "Making all variables global",
+        "Bundling data and methods that work on that data within a class",
+        "Creating multiple classes",
+        "Importing external modules"
+      ],
+      "correctAnswer": 1,
+      "topics": ["oop"]
+    },
+    {
+      "id": 104,
+      "type": "Code Analysis",
+      "question": "What is the output?",
+      "code": "class Counter:\n    count = 0\n    \n    def __init__(self):\n        Counter.count += 1\n\nc1 = Counter()\nc2 = Counter()\nprint(Counter.count)",
+      "answers": [
+        "0",
+        "1",
+        "2",
+        "Error"
+      ],
+      "correctAnswer": 2,
+      "topics": ["oop"]
+    }
+  ]
+}
+

@@ -1,0 +1,85 @@
+{
+  "questions": [
+    {
+      "id": 14,
+      "type": "Theory",
+      "question": "Which statement is used to import a specific function from a module?",
+      "answers": [
+        "import module.function",
+        "from module import function",
+        "include module.function",
+        "using module.function"
+      ],
+      "correctAnswer": 1,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 23,
+      "type": "Code Analysis",
+      "question": "What is the result?",
+      "code": "with open('test.txt', 'w') as f:\n    f.write('Hello')\n    # File automatically closes here\nprint('File closed:', f.closed)",
+      "answers": [
+        "File closed: False",
+        "File closed: True",
+        "Error",
+        "No output"
+      ],
+      "correctAnswer": 1,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 118,
+      "type": "Theory",
+      "question": "Which module is used for working with dates and times in Python?",
+      "answers": [
+        "time",
+        "datetime",
+        "calendar",
+        "date"
+      ],
+      "correctAnswer": 1,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 119,
+      "type": "Theory",
+      "question": "Which module provides functions for working with JSON data?",
+      "answers": [
+        "jsonlib",
+        "json",
+        "data",
+        "serialize"
+      ],
+      "correctAnswer": 1,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 120,
+      "type": "Code Analysis",
+      "question": "What will be the output?",
+      "code": "import math\nprint(math.ceil(4.2))",
+      "answers": [
+        "4",
+        "4.2",
+        "5",
+        "Error"
+      ],
+      "correctAnswer": 2,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 121,
+      "type": "Theory",
+      "question": "Which module is used for generating random numbers?",
+      "answers": [
+        "rand",
+        "random",
+        "numbers",
+        "math"
+      ],
+      "correctAnswer": 1,
+      "topics": ["standard-library"]
+    }
+  ]
+}
+

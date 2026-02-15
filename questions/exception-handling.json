@@ -1,0 +1,85 @@
+{
+  "questions": [
+    {
+      "id": 3,
+      "type": "Theory",
+      "question": "Which exception is raised when you try to access a dictionary key that doesn't exist?",
+      "answers": [
+        "KeyError",
+        "ValueError",
+        "IndexError",
+        "AttributeError"
+      ],
+      "correctAnswer": 0,
+      "topics": ["exception-handling"]
+    },
+    {
+      "id": 4,
+      "type": "Code Analysis",
+      "question": "What will this code output?",
+      "code": "try:\n    result = 10 / 0\nexcept ZeroDivisionError:\n    print(\"Error!\")\nfinally:\n    print(\"Done\")",
+      "answers": [
+        "Error!",
+        "Done",
+        "Error!\nDone",
+        "No output"
+      ],
+      "correctAnswer": 2,
+      "topics": ["exception-handling"]
+    },
+    {
+      "id": 20,
+      "type": "Multiple Select",
+      "question": "Which of the following are valid ways to handle exceptions in Python? (Select all that apply)",
+      "answers": [
+        "try-except",
+        "try-catch",
+        "try-except-finally",
+        "try-except-else"
+      ],
+      "correctAnswers": [0, 2, 3],
+      "topics": ["exception-handling"]
+    },
+    {
+      "id": 105,
+      "type": "Theory",
+      "question": "What is the purpose of the 'raise' keyword in Python?",
+      "answers": [
+        "To increase a variable's value",
+        "To throw/raise an exception",
+        "To elevate user privileges",
+        "To sort data in ascending order"
+      ],
+      "correctAnswer": 1,
+      "topics": ["exception-handling"]
+    },
+    {
+      "id": 106,
+      "type": "Code Analysis",
+      "question": "What will be the output?",
+      "code": "try:\n    print(\"Start\")\n    x = 1 / 1\n    print(\"Middle\")\nexcept ZeroDivisionError:\n    print(\"Error\")\nelse:\n    print(\"Success\")",
+      "answers": [
+        "Start\nMiddle",
+        "Start\nMiddle\nSuccess",
+        "Start\nError",
+        "Error"
+      ],
+      "correctAnswer": 1,
+      "topics": ["exception-handling"]
+    },
+    {
+      "id": 107,
+      "type": "Theory",
+      "question": "Which exception is raised when a sequence subscript is out of range?",
+      "answers": [
+        "KeyError",
+        "ValueError",
+        "IndexError",
+        "TypeError"
+      ],
+      "correctAnswer": 2,
+      "topics": ["exception-handling"]
+    }
+  ]
+}
+
