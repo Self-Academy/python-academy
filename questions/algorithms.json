@@ -10,7 +10,7 @@
         "O(n²)",
         "O(1)"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["algorithms"]
     },
     {
@@ -23,7 +23,7 @@
         "Timsort",
         "Merge Sort"
       ],
-      "correctAnswer": 2,
+      "answerScores": [0.3, 0, 1, 0.5],
       "topics": ["algorithms"]
     },
     {
@@ -36,7 +36,7 @@
         "Brute Force",
         "Backtracking"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0.2, 1, 0, 0.3],
       "topics": ["algorithms"]
     },
     {
@@ -50,7 +50,7 @@
         "8",
         "13"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["algorithms"]
     },
     {
@@ -63,7 +63,7 @@
         "O(n²)",
         "O(log n)"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["algorithms"]
     },
     {
@@ -77,7 +77,7 @@
         "Maximum value in list",
         "Length of list"
       ],
-      "correctAnswer": 2,
+      "answerScores": [0, 0, 1, 0],
       "topics": ["algorithms"]
     }
   ]

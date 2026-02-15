@@ -260,6 +260,11 @@ header h1 {
     background: #e8f5e9;
 }
 
+.timeline-detail .answer-list li.partial-answer {
+    border-left: 4px solid var(--warning-color);
+    background: #fff9e6;
+}
+
 .timeline-detail .answer-list li.wrong-answer {
     border-left: 4px solid var(--danger-color);
     background: #ffebee;
@@ -279,13 +284,13 @@ header h1 {
     color: white;
 }
 
-.timeline-detail .badge-incorrect {
-    background: var(--danger-color);
+.timeline-detail .badge-partial {
+    background: var(--warning-color);
     color: white;
 }
 
-.timeline-detail .badge-your-answer {
-    background: var(--primary-color);
+.timeline-detail .badge-incorrect {
+    background: var(--danger-color);
     color: white;
 }
 
@@ -351,9 +356,11 @@ header h1 {
 .question-counter {
     text-align: center;
     color: white;
-    font-size: 1.1em;
+    font-size: 1em;
     margin-bottom: 20px;
-    font-weight: bold;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .question-type {
@@ -536,4 +543,3 @@ header h1 {
         font-size: 2em;
     }
 }
-

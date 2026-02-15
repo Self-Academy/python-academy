@@ -11,7 +11,7 @@
         "[0, 2, 4]",
         "[1, 9]"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["advanced"]
     },
     {
@@ -24,7 +24,7 @@
         "A function that modifies global variables",
         "A function that handles exceptions"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["advanced"]
     },
     {
@@ -38,7 +38,7 @@
         "30",
         "Error"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["advanced"]
     },
     {
@@ -51,7 +51,7 @@
         "'is' compares values, '==' compares identity",
         "'==' is for numbers, 'is' is for strings"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["advanced"]
     },
     {
@@ -59,12 +59,12 @@
       "type": "Theory",
       "question": "What is a decorator in Python?",
       "answers": [
-        "A function that modifies another function",
-        "A way to decorate strings",
-        "A type of comment",
-        "A module for styling output"
+        "A styling directive that defines linter settings on the Python file",
+        "A function that can modify another function's result",
+        "A function that can change the behavior of another function by wrapping it",
+        "A filetype like CSS for HTML"
       ],
-      "correctAnswer": 0,
+      "answerScores": [0, 0.6, 1, 0],
       "topics": ["advanced"]
     },
     {
@@ -78,7 +78,7 @@
         "0\n1\n2\n3",
         "3"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["advanced"]
     }
   ]

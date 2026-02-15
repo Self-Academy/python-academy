@@ -10,7 +10,7 @@
         "include module.function",
         "using module.function"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0.3, 1, 0, 0],
       "topics": ["standard-library"]
     },
     {
@@ -24,7 +24,7 @@
         "Error",
         "No output"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["standard-library"]
     },
     {
@@ -37,7 +37,7 @@
         "calendar",
         "date"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0.5, 1, 0.3, 0],
       "topics": ["standard-library"]
     },
     {
@@ -50,7 +50,7 @@
         "data",
         "serialize"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["standard-library"]
     },
     {
@@ -64,7 +64,7 @@
         "5",
         "Error"
       ],
-      "correctAnswer": 2,
+      "answerScores": [0, 0, 1, 0],
       "topics": ["standard-library"]
     },
     {
@@ -77,7 +77,7 @@
         "numbers",
         "math"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0.2],
       "topics": ["standard-library"]
     }
   ]
