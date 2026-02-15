@@ -198,11 +198,15 @@ class PythonAcademy {
         document.getElementById('submit-answer-btn').disabled = true;
     }
 
+    /**
+     * Display answer options for the current question.
+     * Uses explicit multipleChoice property to determine input type.
+     */
     displayAnswers(question) {
         const container = document.getElementById('answers-container');
         container.innerHTML = '';
 
-        const isMultiSelect = question.correctAnswers && question.correctAnswers.length > 1;
+        const isMultiSelect = question.multipleChoice || false;
         const inputType = isMultiSelect ? 'checkbox' : 'radio';
 
         question.answers.forEach((answer, index) => {
@@ -269,27 +273,27 @@ class PythonAcademy {
         });
     }
 
+    /**
+     * Process the user's answer submission and move to next question or show results.
+     */
     submitAnswer() {
         const question = this.selectedQuestions[this.currentQuestionIndex];
         const selectedAnswers = Array.from(document.querySelectorAll('input[name="answer"]:checked'))
             .map(input => parseInt(input.value));
 
-        // Store user answer
         this.userAnswers.push(selectedAnswers);
 
-        // Calculate fractional score
         const scoreResult = this.calculateScore(question, selectedAnswers);
+        const correctnessResult = this.determineCorrectness(question, scoreResult.score, selectedAnswers);
 
-        // Store detailed answer info for timeline
         this.answerDetails.push({
             question: question,
             userAnswers: selectedAnswers,
             score: scoreResult.score,
-            isFullyCorrect: scoreResult.score >= 0.99,
-            isPartiallyCorrect: scoreResult.score > 0.1 && scoreResult.score < 0.99
+            isFullyCorrect: correctnessResult.isFullyCorrect,
+            isPartiallyCorrect: correctnessResult.isPartiallyCorrect
         });
 
-        // Update scores for all topics this question contributes to
         question.topics.forEach(topicId => {
             if (this.topicScores[topicId]) {
                 this.topicScores[topicId].total += 1;
@@ -297,20 +301,66 @@ class PythonAcademy {
             }
         });
 
-        // Move to next question or show results
         this.currentQuestionIndex++;
         if (this.currentQuestionIndex < this.selectedQuestions.length) {
             this.displayQuestion();
-        } else {
-            this.showResults();
+            return;
         }
+
+        this.showResults();
+    }
+
+    /**
+     * Determine if answer is fully correct, partially correct, or incorrect.
+     *
+     * @param {Object} question - The question object
+     * @param {number} score - The calculated score (0-1)
+     * @param {Array} selectedAnswers - Array of selected answer indices
+     * @returns {Object} Object with isFullyCorrect and isPartiallyCorrect booleans
+     */
+    determineCorrectness(question, score, selectedAnswers) {
+        if (question.multipleChoice) {
+            const correctIndices = question.answerScores
+                .map((s, idx) => s > 0 ? idx : -1)
+                .filter(idx => idx !== -1);
+            const incorrectIndices = question.answerScores
+                .map((s, idx) => s < 0 ? idx : -1)
+                .filter(idx => idx !== -1);
+
+            const selectedCorrect = selectedAnswers.filter(idx => correctIndices.includes(idx)).length;
+            const selectedIncorrect = selectedAnswers.filter(idx => incorrectIndices.includes(idx)).length;
+
+            const allCorrectSelected = selectedCorrect === correctIndices.length;
+            const noIncorrectSelected = selectedIncorrect === 0;
+
+            if (allCorrectSelected && noIncorrectSelected) {
+                return { isFullyCorrect: true, isPartiallyCorrect: false };
+            }
+
+            const allIncorrectSelected = selectedIncorrect === incorrectIndices.length;
+            const noCorrectSelected = selectedCorrect === 0;
+
+            if (allIncorrectSelected && noCorrectSelected) {
+                return { isFullyCorrect: false, isPartiallyCorrect: false };
+            }
+
+            return { isFullyCorrect: false, isPartiallyCorrect: true };
+        }
+
+        if (score >= 0.99) {
+            return { isFullyCorrect: true, isPartiallyCorrect: false };
+        }
+
+        if (score > 0.01) {
+            return { isFullyCorrect: false, isPartiallyCorrect: true };
+        }
+
+        return { isFullyCorrect: false, isPartiallyCorrect: false };
     }
 
     /**
      * Calculate the score for a question based on selected answers.
-     *
-     * Single-select questions (has answer with score = 1.0): User gets the score of their selected answer.
-     * Multi-select questions (no answer with score = 1.0): Uses positive/negative scoring with normalization.
+     * Simply sums the scores of selected answers, then clamps to 0-1 range.
      *
      * @param {Object} question - The question object with answerScores array
      * @param {Array} selectedAnswers - Array of selected answer indices
@@ -324,39 +374,16 @@ class PythonAcademy {
             return { score: isCorrect ? 1 : 0 };
         }
 
-        const scores = question.answerScores;
-        const hasFullScore = scores.some(score => score === 1.0);
-
-        if (hasFullScore) {
-            if (selectedAnswers.length === 0) {
-                return { score: 0 };
-            }
-            const selectedScore = scores[selectedAnswers[0]];
-            return { score: Math.max(0, Math.min(1, selectedScore)) };
-        }
-
-        let earnedScore = 0;
-
-        scores.forEach((score, idx) => {
-            const isSelected = selectedAnswers.includes(idx);
-
-            if (isSelected) {
-                earnedScore += score;
-            } else if (score < 0) {
-                earnedScore += Math.abs(score);
-            }
-        });
-
-        const maxPossible = scores.reduce((sum, score) => sum + Math.abs(score), 0);
-        const minPossible = scores.reduce((sum, score) => sum + Math.min(0, score), 0);
-
-        if (maxPossible === minPossible) {
+        if (selectedAnswers.length === 0) {
             return { score: 0 };
         }
 
-        const normalizedScore = (earnedScore - minPossible) / (maxPossible - minPossible);
+        let earnedScore = 0;
+        selectedAnswers.forEach(idx => {
+            earnedScore += question.answerScores[idx];
+        });
 
-        return { score: Math.max(0, Math.min(1, normalizedScore)) };
+        return { score: Math.max(0, Math.min(1, earnedScore)) };
     }
 
     /**

@@ -11,7 +11,8 @@
         "10 10",
         "5 5"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["python-basics", "data-structures"]
     },
     {
@@ -25,7 +26,8 @@
         "b 2",
         "a 1\nc 3"
       ],
-      "answerScores": [0, 1, 0, 0],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
       "topics": ["data-structures", "python-basics"]
     }
   ]
