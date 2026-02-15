@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Academy - Test Your Knowledge</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Python Academy</h1>
+            <p class="subtitle">Test your Python knowledge on different concepts and evaluate where you are at!</p>
+            <p class="subtitle"><a href="examples.html" style="color: white; text-decoration: underline;">View Example Questions</a></p>
+        </header>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <div class="card">
+                <h2>Welcome to Python Academy</h2>
+                <p>This test will evaluate your knowledge across multiple Python topics including:</p>
+                <ul id="topics-list"></ul>
+                <div class="config-section">
+                    <label for="num-questions">Number of questions:</label>
+                    <input type="number" id="num-questions" min="5" max="100" value="10">
+                </div>
+                <button id="start-btn" class="btn btn-primary">Start Test</button>
+            </div>
+        </div>
+
+        <!-- Question Screen -->
+        <div id="question-screen" class="screen">
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <div class="question-counter">
+                Question <span id="current-question">1</span> of <span id="total-questions">10</span>
+            </div>
+
+            <div class="card question-card">
+                <div class="question-type" id="question-type"></div>
+                <h2 id="question-text"></h2>
+                <pre id="question-code" class="code-block"></pre>
+                <div id="answers-container" class="answers-container"></div>
+                <button id="submit-answer-btn" class="btn btn-primary" disabled>Submit Answer</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="card">
+                <h2>📊 Your Results</h2>
+                <div id="overall-score" class="overall-score"></div>
+                <div id="topic-scores" class="topic-scores"></div>
+                <button id="restart-btn" class="btn btn-primary">Take Test Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+

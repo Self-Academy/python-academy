@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Academy - Example Questions</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #3776ab;
+        }
+        .question {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #3776ab;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .type {
+            display: inline-block;
+            background: #ffd43b;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .topics {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        .answer {
+            color: #4caf50;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .back-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #3776ab;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .back-link:hover {
+            background: #2a5d8f;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Test</a>
+    <h1>Example Questions</h1>
+    <p>Here are some example questions from the Python Academy test to give you an idea of what to expect:</p>
+
+    <div class="question">
+        <span class="type">Theory</span>
+        <h3>Question 1</h3>
+        <p><strong>What function is used to get user input from the console in Python 3?</strong></p>
+        <ul>
+            <li>input()</li>
+            <li>raw_input()</li>
+            <li>get_input()</li>
+            <li>read()</li>
+        </ul>
+        <p class="answer">Answer: input()</p>
+        <p class="topics">Topics: Input/Output</p>
+    </div>
+
+    <div class="question">
+        <span class="type">Code Analysis</span>
+        <h3>Question 2</h3>
+        <p><strong>What will be printed by this code?</strong></p>
+        <pre>x = 5
+y = 10
+x, y = y, x
+print(x, y)</pre>
+        <ul>
+            <li>5 10</li>
+            <li>10 5</li>
+            <li>10 10</li>
+            <li>5 5</li>
+        </ul>
+        <p class="answer">Answer: 10 5</p>
+        <p class="topics">Topics: Input/Output, Data Structures</p>
+    </div>
+
+    <div class="question">
+        <span class="type">Code Analysis</span>
+        <h3>Question 3</h3>
+        <p><strong>What will this code output?</strong></p>
+        <pre>try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("Error!")
+finally:
+    print("Done")</pre>
+        <ul>
+            <li>Error!</li>
+            <li>Done</li>
+            <li>Error!<br>Done</li>
+            <li>No output</li>
+        </ul>
+        <p class="answer">Answer: Error! followed by Done (on separate lines)</p>
+        <p class="topics">Topics: Exception Handling, Control Flow</p>
+    </div>
+
+    <div class="question">
+        <span class="type">Theory</span>
+        <h3>Question 4</h3>
+        <p><strong>What is the purpose of the __init__ method in a Python class?</strong></p>
+        <ul>
+            <li>To delete an object</li>
+            <li>To initialize object attributes</li>
+            <li>To create a class variable</li>
+            <li>To import modules</li>
+        </ul>
+        <p class="answer">Answer: To initialize object attributes</p>
+        <p class="topics">Topics: Object-Oriented Programming</p>
+    </div>
+
+    <div class="question">
+        <span class="type">Code Analysis</span>
+        <h3>Question 5</h3>
+        <p><strong>What will this list comprehension produce?</strong></p>
+        <pre>result = [x**2 for x in range(5) if x % 2 == 0]
+print(result)</pre>
+        <ul>
+            <li>[0, 1, 4, 9, 16]</li>
+            <li>[0, 4, 16]</li>
+            <li>[0, 2, 4]</li>
+            <li>[1, 9]</li>
+        </ul>
+        <p class="answer">Answer: [0, 4, 16]</p>
+        <p class="topics">Topics: Advanced Concepts, Data Structures</p>
+    </div>
+
+    <a href="index.html" class="back-link">← Start the Test</a>
+</body>
+</html>
+
