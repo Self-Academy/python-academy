@@ -10,7 +10,7 @@
         "IndexError",
         "AttributeError"
       ],
-      "correctAnswer": 0,
+      "answerScores": [1, 0, 0, 0],
       "topics": ["exception-handling"]
     },
     {
@@ -24,7 +24,7 @@
         "Error!\nDone",
         "No output"
       ],
-      "correctAnswer": 2,
+      "answerScores": [0.5, 0.5, 1, 0],
       "topics": ["exception-handling"]
     },
     {
@@ -37,7 +37,7 @@
         "try-except-finally",
         "try-except-else"
       ],
-      "correctAnswers": [0, 2, 3],
+      "answerScores": [0.4, -0.4, 0.3, 0.3],
       "topics": ["exception-handling"]
     },
     {
@@ -50,7 +50,7 @@
         "To elevate user privileges",
         "To sort data in ascending order"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["exception-handling"]
     },
     {
@@ -64,7 +64,7 @@
         "Start\nError",
         "Error"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0.6, 1, 0, 0],
       "topics": ["exception-handling"]
     },
     {
@@ -77,7 +77,7 @@
         "IndexError",
         "TypeError"
       ],
-      "correctAnswer": 2,
+      "answerScores": [0, 0, 1, 0],
       "topics": ["exception-handling"]
     }
   ]

@@ -219,6 +219,30 @@ class PythonAcademy {
             label.htmlFor = `answer-${index}`;
             label.textContent = answer;
 
+            // Make the entire option div clickable
+            optionDiv.addEventListener('click', (e) => {
+                // Prevent event bubbling if clicking on input or label
+                if (e.target === input || e.target === label) {
+                    return;
+                }
+
+                if (inputType === 'radio') {
+                    // For radio buttons, select this option and deselect others
+                    input.checked = true;
+                    document.querySelectorAll('.answer-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    optionDiv.classList.add('selected');
+                } else {
+                    // For checkboxes, toggle this option
+                    input.checked = !input.checked;
+                    optionDiv.classList.toggle('selected', input.checked);
+                }
+
+                // Enable submit button
+                document.getElementById('submit-answer-btn').disabled = false;
+            });
+
             input.addEventListener('change', () => {
                 if (inputType === 'radio') {
                     document.querySelectorAll('.answer-option').forEach(opt => {
@@ -253,27 +277,23 @@ class PythonAcademy {
         // Store user answer
         this.userAnswers.push(selectedAnswers);
 
-        // Check if answer is correct
-        const correctAnswers = question.correctAnswers || [question.correctAnswer];
-        const isFullyCorrect = this.checkAnswer(question, selectedAnswers);
-        const isPartiallyCorrect = this.checkPartialAnswer(question, selectedAnswers);
+        // Calculate fractional score
+        const scoreResult = this.calculateScore(question, selectedAnswers);
 
         // Store detailed answer info for timeline
         this.answerDetails.push({
             question: question,
             userAnswers: selectedAnswers,
-            correctAnswers: correctAnswers,
-            isFullyCorrect: isFullyCorrect,
-            isPartiallyCorrect: isPartiallyCorrect
+            score: scoreResult.score,
+            isFullyCorrect: scoreResult.score >= 0.99,
+            isPartiallyCorrect: scoreResult.score > 0.1 && scoreResult.score < 0.99
         });
 
         // Update scores for all topics this question contributes to
         question.topics.forEach(topicId => {
             if (this.topicScores[topicId]) {
                 this.topicScores[topicId].total += 1;
-                if (isFullyCorrect) {
-                    this.topicScores[topicId].score += 1;
-                }
+                this.topicScores[topicId].score += scoreResult.score;
             }
         });
 
@@ -286,36 +306,65 @@ class PythonAcademy {
         }
     }
 
-    checkAnswer(question, selectedAnswers) {
-        const correctAnswers = question.correctAnswers || [question.correctAnswer];
-
-        if (selectedAnswers.length !== correctAnswers.length) {
-            return false;
+    /**
+     * Calculate the score for a question based on selected answers.
+     *
+     * Single-select questions (has answer with score = 1.0): User gets the score of their selected answer.
+     * Multi-select questions (no answer with score = 1.0): Uses positive/negative scoring with normalization.
+     *
+     * @param {Object} question - The question object with answerScores array
+     * @param {Array} selectedAnswers - Array of selected answer indices
+     * @returns {Object} Object with score property (0-1 range)
+     */
+    calculateScore(question, selectedAnswers) {
+        if (!question.answerScores) {
+            const correctAnswers = question.correctAnswers || [question.correctAnswer];
+            const isCorrect = selectedAnswers.length === correctAnswers.length &&
+                selectedAnswers.sort().every((val, index) => val === correctAnswers.sort()[index]);
+            return { score: isCorrect ? 1 : 0 };
         }
 
-        return selectedAnswers.sort().every((val, index) => val === correctAnswers.sort()[index]);
-    }
+        const scores = question.answerScores;
+        const hasFullScore = scores.some(score => score === 1.0);
 
-    checkPartialAnswer(question, selectedAnswers) {
-        const correctAnswers = question.correctAnswers || [question.correctAnswer];
-
-        // For single answer questions, there's no partial credit
-        if (correctAnswers.length === 1) {
-            return false;
+        if (hasFullScore) {
+            if (selectedAnswers.length === 0) {
+                return { score: 0 };
+            }
+            const selectedScore = scores[selectedAnswers[0]];
+            return { score: Math.max(0, Math.min(1, selectedScore)) };
         }
 
-        // For multiple answer questions, check if some answers are correct
-        const correctCount = selectedAnswers.filter(ans => correctAnswers.includes(ans)).length;
-        const incorrectCount = selectedAnswers.filter(ans => !correctAnswers.includes(ans)).length;
+        let earnedScore = 0;
 
-        // Partial if at least one correct and not all correct, and no incorrect selections
-        return correctCount > 0 && correctCount < correctAnswers.length && incorrectCount === 0;
+        scores.forEach((score, idx) => {
+            const isSelected = selectedAnswers.includes(idx);
+
+            if (isSelected) {
+                earnedScore += score;
+            } else if (score < 0) {
+                earnedScore += Math.abs(score);
+            }
+        });
+
+        const maxPossible = scores.reduce((sum, score) => sum + Math.abs(score), 0);
+        const minPossible = scores.reduce((sum, score) => sum + Math.min(0, score), 0);
+
+        if (maxPossible === minPossible) {
+            return { score: 0 };
+        }
+
+        const normalizedScore = (earnedScore - minPossible) / (maxPossible - minPossible);
+
+        return { score: Math.max(0, Math.min(1, normalizedScore)) };
     }
 
+    /**
+     * Display the results screen with overall and topic-specific scores.
+     */
     showResults() {
         this.switchScreen('results-screen');
 
-        // Calculate overall score
         let totalScore = 0;
         let totalPossible = 0;
 
@@ -326,15 +375,13 @@ class PythonAcademy {
 
         const overallPercentage = totalPossible > 0 ? Math.round((totalScore / totalPossible) * 100) : 0;
 
-        // Display overall score
         const overallDiv = document.getElementById('overall-score');
         overallDiv.innerHTML = `
             <h3>Overall Score</h3>
             <div class="score-value">${overallPercentage}%</div>
-            <p>${totalScore} out of ${totalPossible} correct</p>
+            <p>${totalScore.toFixed(1)} out of ${totalPossible} points</p>
         `;
 
-        // Display topic scores
         this.displayTopicScores();
     }
 
@@ -362,7 +409,7 @@ class PythonAcademy {
                         ${percentage}%
                     </div>
                 </div>
-                <p>${score.score}/${score.total} correct</p>
+                <p>${score.score.toFixed(1)}/${score.total} points (${percentage}%)</p>
                 <p class="feedback">${feedback}</p>
             `;
 
@@ -450,11 +497,11 @@ class PythonAcademy {
         document.querySelectorAll('.timeline-circle')[index].classList.add('active');
 
         const question = detail.question;
-        const correctAnswers = detail.correctAnswers;
         const userAnswers = detail.userAnswers;
+        const userScore = detail.score;
 
         let html = `
-            <h4>Question ${index + 1}</h4>
+            <h4>Question ${index + 1} - Score: ${(userScore * 100).toFixed(0)}%</h4>
             <div class="question-info">
                 <span class="question-type">${question.type || 'Theory'}</span>
                 <p><strong>${question.question}</strong></p>
@@ -466,36 +513,71 @@ class PythonAcademy {
 
         html += `</div><h5>Answers:</h5><ul class="answer-list">`;
 
+        // Use answerScores if available to determine correctness
         question.answers.forEach((answer, ansIndex) => {
-            const isCorrect = correctAnswers.includes(ansIndex);
             const wasSelected = userAnswers.includes(ansIndex);
+            let answerScore;
+
+            if (question.answerScores) {
+                answerScore = question.answerScores[ansIndex];
+            } else {
+                const correctAnswers = question.correctAnswers || [question.correctAnswer];
+                answerScore = correctAnswers.includes(ansIndex) ? 1 : 0;
+            }
+
+            // For display purposes
+            const isPositive = answerScore > 0;
+            const isNegative = answerScore < 0;
+            const isNeutral = answerScore === 0;
+            const isFullScore = answerScore === 1.0;
 
             let className = '';
             let badges = '';
+            let scoreDisplay = '';
 
-            if (isCorrect && wasSelected) {
-                className = 'correct-answer';
-                badges = '<span class="answer-badge badge-correct">✓ Correct</span><span class="answer-badge badge-your-answer">Your Answer</span>';
-            } else if (isCorrect && !wasSelected) {
-                className = 'correct-answer';
-                badges = '<span class="answer-badge badge-correct">✓ Correct Answer</span>';
-            } else if (!isCorrect && wasSelected) {
-                className = 'wrong-answer';
-                badges = '<span class="answer-badge badge-incorrect">✗ Wrong</span><span class="answer-badge badge-your-answer">Your Answer</span>';
+            if (question.answerScores) {
+                // Show score with + or - sign for clarity
+                const scoreText = answerScore > 0 ? `+${(answerScore * 100).toFixed(0)}%` :
+                                  answerScore < 0 ? `${(answerScore * 100).toFixed(0)}%` :
+                                  '0%';
+                scoreDisplay = ` <span style="font-size: 0.85em; color: #666;">(${scoreText} value)</span>`;
             }
 
-            html += `<li class="${className}">${this.escapeHtml(answer)} ${badges}</li>`;
+            if (isFullScore && wasSelected) {
+                className = 'correct-answer';
+                badges = '<span class="answer-badge badge-correct">✓ Correct</span><span class="answer-badge badge-your-answer">Your Answer</span>';
+            } else if (isPositive && !isFullScore && wasSelected) {
+                className = 'partial-answer';
+                badges = '<span class="answer-badge badge-partial">~ Partial</span><span class="answer-badge badge-your-answer">Your Answer</span>';
+            } else if (isFullScore && !wasSelected) {
+                className = 'correct-answer';
+                badges = '<span class="answer-badge badge-correct">✓ Correct Answer</span>';
+            } else if (isPositive && !isFullScore && !wasSelected) {
+                className = 'partial-answer';
+                badges = '<span class="answer-badge badge-partial">~ Partial Credit Available</span>';
+            } else if (isNegative && wasSelected) {
+                className = 'wrong-answer';
+                badges = '<span class="answer-badge badge-incorrect">✗ Wrong</span><span class="answer-badge badge-your-answer">Your Answer</span>';
+            } else if (isNegative && !wasSelected) {
+                className = 'wrong-answer';
+                badges = '<span class="answer-badge badge-incorrect">✗ Wrong (Avoided)</span>';
+            } else if (isNeutral && wasSelected) {
+                className = 'user-answer';
+                badges = '<span class="answer-badge badge-your-answer">Your Answer (No Points)</span>';
+            }
+
+            html += `<li class="${className}">${this.escapeHtml(answer)}${scoreDisplay} ${badges}</li>`;
         });
 
         html += `</ul>`;
 
-        // Add result summary
+        const scorePercent = (userScore * 100).toFixed(0);
         if (detail.isFullyCorrect) {
-            html += `<p style="color: var(--success-color); font-weight: bold; margin-top: 15px;">✓ You answered this correctly!</p>`;
+            html += `<p style="color: var(--success-color); font-weight: bold; margin-top: 15px;">✓ Perfect! You earned ${scorePercent}% (${userScore.toFixed(2)} points)</p>`;
         } else if (detail.isPartiallyCorrect) {
-            html += `<p style="color: var(--warning-color); font-weight: bold; margin-top: 15px;">⚠ Partially correct - you missed some correct answers.</p>`;
+            html += `<p style="color: var(--warning-color); font-weight: bold; margin-top: 15px;">⚠ Partially correct - You earned ${scorePercent}% (${userScore.toFixed(2)} points)</p>`;
         } else {
-            html += `<p style="color: var(--danger-color); font-weight: bold; margin-top: 15px;">✗ This answer was incorrect.</p>`;
+            html += `<p style="color: var(--danger-color); font-weight: bold; margin-top: 15px;">✗ Incorrect - You earned ${scorePercent}% (${userScore.toFixed(2)} points)</p>`;
         }
 
         detailContainer.innerHTML = html;
@@ -503,12 +585,20 @@ class PythonAcademy {
         detailContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
+    /**
+     * Escape HTML special characters to prevent XSS attacks.
+     * @param {string} text - Text to escape
+     * @returns {string} HTML-escaped text
+     */
     escapeHtml(text) {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
     }
 
+    /**
+     * Restart the test by returning to the start screen.
+     */
     restartTest() {
         this.switchScreen('start-screen');
     }

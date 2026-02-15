@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Academy - Test Suite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #3776ab;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #3776ab;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3776ab;
+            padding-bottom: 5px;
+        }
+
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        .test-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .test-result.pass {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+
+        .test-result.fail {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+
+        .test-name {
+            font-weight: bold;
+        }
+
+        .test-status {
+            padding: 3px 10px;
+            border-radius: 12px;
+            color: white;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .test-status.pass {
+            background: #4caf50;
+        }
+
+        .test-status.fail {
+            background: #f44336;
+        }
+
+        .test-details {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .summary {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #3776ab, #5a8ec4);
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .summary h2 {
+            color: white;
+            border: none;
+            margin: 0;
+        }
+
+        .summary-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .stat {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            background: #3776ab;
+            color: white;
+            margin: 20px 0;
+        }
+
+        button:hover {
+            background: #2a5d8f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐍 Python Academy Test Suite</h1>
+        <p>Comprehensive testing of all scoring logic and functionality</p>
+
+        <button onclick="runAllTests()">Run All Tests</button>
+
+        <div id="test-results"></div>
+
+        <div id="summary" class="summary" style="display: none;">
+            <h2>Test Summary</h2>
+            <div class="summary-stats">
+                <div>
+                    <div class="stat" id="passed-count">0</div>
+                    <div>Passed</div>
+                </div>
+                <div>
+                    <div class="stat" id="failed-count">0</div>
+                    <div>Failed</div>
+                </div>
+                <div>
+                    <div class="stat" id="total-count">0</div>
+                    <div>Total</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class TestRunner {
+            constructor() {
+                this.tests = [];
+                this.results = [];
+            }
+
+            test(name, fn) {
+                this.tests.push({ name, fn });
+            }
+
+            assertEqual(actual, expected, message = '') {
+                if (actual !== expected) {
+                    throw new Error(`Expected ${expected}, got ${actual}. ${message}`);
+                }
+            }
+
+            assertAlmostEqual(actual, expected, precision = 2, message = '') {
+                const diff = Math.abs(actual - expected);
+                const tolerance = Math.pow(10, -precision);
+                if (diff > tolerance) {
+                    throw new Error(`Expected ${expected}, got ${actual} (diff: ${diff}). ${message}`);
+                }
+            }
+
+            assertTrue(condition, message = '') {
+                if (!condition) {
+                    throw new Error(`Assertion failed. ${message}`);
+                }
+            }
+
+            async runAll() {
+                this.results = [];
+                const resultsDiv = document.getElementById('test-results');
+                resultsDiv.innerHTML = '';
+
+                for (const test of this.tests) {
+                    try {
+                        await test.fn();
+                        this.results.push({ name: test.name, passed: true });
+                    } catch (error) {
+                        this.results.push({ name: test.name, passed: false, error: error.message });
+                    }
+                }
+
+                this.displayResults();
+                this.displaySummary();
+            }
+
+            displayResults() {
+                const resultsDiv = document.getElementById('test-results');
+
+                const groupedResults = {};
+                this.results.forEach(result => {
+                    const category = result.name.split(' - ')[0];
+                    if (!groupedResults[category]) {
+                        groupedResults[category] = [];
+                    }
+                    groupedResults[category].push(result);
+                });
+
+                Object.keys(groupedResults).forEach(category => {
+                    const section = document.createElement('div');
+                    section.className = 'test-section';
+
+                    const heading = document.createElement('h2');
+                    heading.textContent = category;
+                    section.appendChild(heading);
+
+                    groupedResults[category].forEach(result => {
+                        const resultDiv = document.createElement('div');
+                        resultDiv.className = `test-result ${result.passed ? 'pass' : 'fail'}`;
+
+                        const nameDiv = document.createElement('div');
+                        nameDiv.className = 'test-name';
+                        nameDiv.textContent = result.name.split(' - ')[1] || result.name;
+
+                        const statusDiv = document.createElement('div');
+                        statusDiv.className = `test-status ${result.passed ? 'pass' : 'fail'}`;
+                        statusDiv.textContent = result.passed ? 'PASS' : 'FAIL';
+
+                        resultDiv.appendChild(nameDiv);
+                        resultDiv.appendChild(statusDiv);
+
+                        if (!result.passed && result.error) {
+                            const detailsDiv = document.createElement('div');
+                            detailsDiv.className = 'test-details';
+                            detailsDiv.textContent = result.error;
+                            resultDiv.appendChild(detailsDiv);
+                        }
+
+                        section.appendChild(resultDiv);
+                    });
+
+                    resultsDiv.appendChild(section);
+                });
+            }
+
+            displaySummary() {
+                const passed = this.results.filter(r => r.passed).length;
+                const failed = this.results.filter(r => !r.passed).length;
+                const total = this.results.length;
+
+                document.getElementById('passed-count').textContent = passed;
+                document.getElementById('failed-count').textContent = failed;
+                document.getElementById('total-count').textContent = total;
+                document.getElementById('summary').style.display = 'block';
+            }
+        }
+
+        const runner = new TestRunner();
+
+        runner.test('Single-Select Scoring - Perfect answer (score = 1.0)', () => {
+            const question = {
+                answerScores: [0, 1, 0, 0.2]
+            };
+            const selectedAnswers = [1];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertAlmostEqual(result, 1.0, 2, 'Should return 1.0 for perfect answer');
+        });
+
+        runner.test('Single-Select Scoring - Wrong answer (score = 0)', () => {
+            const question = {
+                answerScores: [0, 1, 0, 0.2]
+            };
+            const selectedAnswers = [0];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertAlmostEqual(result, 0.0, 2, 'Should return 0.0 for wrong answer');
+        });
+
+        runner.test('Single-Select Scoring - Partial answer (score = 0.2)', () => {
+            const question = {
+                answerScores: [0, 1, 0, 0.2]
+            };
+            const selectedAnswers = [3];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertAlmostEqual(result, 0.2, 2, 'Should return 0.2 for partial answer');
+        });
+
+        runner.test('Single-Select Scoring - No selection', () => {
+            const question = {
+                answerScores: [0, 1, 0, 0.2]
+            };
+            const selectedAnswers = [];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertAlmostEqual(result, 0.0, 2, 'Should return 0.0 for no selection');
+        });
+
+        runner.test('Multi-Select Scoring - Perfect answer (all correct, avoid all wrong)', () => {
+            const question = {
+                answerScores: [0.5, 0.5, -0.7, -0.3]
+            };
+            const selectedAnswers = [0, 1];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertAlmostEqual(result, 1.0, 2, 'Should return 1.0 for perfect answer');
+        });
+
+        runner.test('Multi-Select Scoring - Worst answer (all wrong, miss all correct)', () => {
+            const question = {
+                answerScores: [0.5, 0.5, -0.7, -0.3]
+            };
+            const selectedAnswers = [2, 3];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertAlmostEqual(result, 0.0, 2, 'Should return 0.0 for worst answer');
+        });
+
+        runner.test('Multi-Select Scoring - Partial (select one correct, avoid wrong)', () => {
+            const question = {
+                answerScores: [0.5, 0.5, -0.7, -0.3]
+            };
+            const selectedAnswers = [0];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertTrue(result > 0.8 && result < 0.9, 'Should return ~0.83 for partial answer');
+        });
+
+        runner.test('Multi-Select Scoring - Partial with mistake (one correct, one wrong)', () => {
+            const question = {
+                answerScores: [0.5, 0.5, -0.7, -0.3]
+            };
+            const selectedAnswers = [0, 2];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertTrue(result > 0.3 && result < 0.4, 'Should return ~0.37 for mixed answer');
+        });
+
+        runner.test('Multi-Select Scoring - Exception handling example', () => {
+            const question = {
+                answerScores: [0.4, -0.4, 0.3, 0.3]
+            };
+            const selectedAnswers = [0, 2, 3];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertAlmostEqual(result, 1.0, 2, 'Should return 1.0 for all correct selections');
+        });
+
+        runner.test('Question Type Detection - Single-select (has score = 1.0)', () => {
+            const question = {
+                answerScores: [0, 1, 0, 0.2]
+            };
+            const hasFullScore = question.answerScores.some(score => score === 1.0);
+            runner.assertTrue(hasFullScore, 'Should detect as single-select');
+        });
+
+        runner.test('Question Type Detection - Multi-select (no score = 1.0)', () => {
+            const question = {
+                answerScores: [0.5, 0.5, -0.7, -0.3]
+            };
+            const hasFullScore = question.answerScores.some(score => score === 1.0);
+            runner.assertTrue(!hasFullScore, 'Should detect as multi-select');
+        });
+
+        runner.test('Legacy Format - Correct answer', () => {
+            const question = {
+                correctAnswer: 1,
+                answers: ['A', 'B', 'C', 'D']
+            };
+            const selectedAnswers = [1];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertAlmostEqual(result, 1.0, 2, 'Should return 1.0 for correct legacy answer');
+        });
+
+        runner.test('Legacy Format - Wrong answer', () => {
+            const question = {
+                correctAnswer: 1,
+                answers: ['A', 'B', 'C', 'D']
+            };
+            const selectedAnswers = [0];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertAlmostEqual(result, 0.0, 2, 'Should return 0.0 for wrong legacy answer');
+        });
+
+        runner.test('Score Normalization - Min boundary', () => {
+            const question = {
+                answerScores: [0.5, 0.5, -0.7, -0.3]
+            };
+            const selectedAnswers = [2, 3];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertTrue(result >= 0, 'Score should not be below 0');
+        });
+
+        runner.test('Score Normalization - Max boundary', () => {
+            const question = {
+                answerScores: [0.5, 0.5, -0.7, -0.3]
+            };
+            const selectedAnswers = [0, 1];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertTrue(result <= 1, 'Score should not exceed 1');
+        });
+
+        runner.test('Edge Case - All answers are zero', () => {
+            const question = {
+                answerScores: [0, 0, 0, 0]
+            };
+            const selectedAnswers = [0];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertTrue(!isNaN(result), 'Should not return NaN');
+        });
+
+        runner.test('Edge Case - All positive scores (no negatives)', () => {
+            const question = {
+                answerScores: [0.3, 0.3, 0.2, 0.2]
+            };
+            const selectedAnswers = [0, 1];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertTrue(result >= 0 && result <= 1, 'Should return valid normalized score');
+        });
+
+        runner.test('Edge Case - All negative scores', () => {
+            const question = {
+                answerScores: [-0.3, -0.3, -0.2, -0.2]
+            };
+            const selectedAnswers = [];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertAlmostEqual(result, 1.0, 2, 'Avoiding all negatives should give perfect score');
+        });
+
+        runner.test('Complex Multi-Select - Mixed positive and negative', () => {
+            const question = {
+                answerScores: [0.3, 0.2, 0.1, -0.2, -0.1, -0.3]
+            };
+            const selectedAnswers = [0, 1, 2];
+            const result = calculateScoreTest(question, selectedAnswers);
+            runner.assertTrue(result > 0.8, 'Selecting all positives should give high score');
+        });
+
+        runner.test('Scoring Consistency - Same selections, same score', () => {
+            const question = {
+                answerScores: [0.5, 0.5, -0.7, -0.3]
+            };
+            const result1 = calculateScoreTest(question, [0, 1]);
+            const result2 = calculateScoreTest(question, [0, 1]);
+            runner.assertEqual(result1, result2, 'Same selections should yield same score');
+        });
+
+        runner.test('Scoring Symmetry - Order independence', () => {
+            const question = {
+                answerScores: [0.5, 0.5, -0.7, -0.3]
+            };
+            const result1 = calculateScoreTest(question, [0, 1]);
+            const result2 = calculateScoreTest(question, [1, 0]);
+            runner.assertEqual(result1, result2, 'Selection order should not matter');
+        });
+
+        function calculateScoreTest(question, selectedAnswers) {
+            if (!question.answerScores) {
+                const correctAnswers = question.correctAnswers || [question.correctAnswer];
+                const isCorrect = selectedAnswers.length === correctAnswers.length &&
+                    selectedAnswers.sort().every((val, index) => val === correctAnswers.sort()[index]);
+                return isCorrect ? 1 : 0;
+            }
+
+            const scores = question.answerScores;
+            const hasFullScore = scores.some(score => score === 1.0);
+
+            if (hasFullScore) {
+                if (selectedAnswers.length === 0) {
+                    return 0;
+                }
+                const selectedScore = scores[selectedAnswers[0]];
+                return Math.max(0, Math.min(1, selectedScore));
+            }
+
+            let earnedScore = 0;
+
+            scores.forEach((score, idx) => {
+                const isSelected = selectedAnswers.includes(idx);
+
+                if (isSelected) {
+                    earnedScore += score;
+                } else if (score < 0) {
+                    earnedScore += Math.abs(score);
+                }
+            });
+
+            const maxPossible = scores.reduce((sum, score) => sum + Math.abs(score), 0);
+            const minPossible = scores.reduce((sum, score) => sum + Math.min(0, score), 0);
+
+            if (maxPossible === minPossible) {
+                return 0;
+            }
+
+            const normalizedScore = (earnedScore - minPossible) / (maxPossible - minPossible);
+
+            return Math.max(0, Math.min(1, normalizedScore));
+        }
+
+        function runAllTests() {
+            runner.runAll();
+        }
+    </script>
+</body>
+</html>
+

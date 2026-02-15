@@ -10,7 +10,7 @@
         "get_input()",
         "read()"
       ],
-      "correctAnswer": 0,
+      "answerScores": [1, 0.3, 0, 0],
       "topics": ["python-basics"]
     },
     {
@@ -23,7 +23,7 @@
         "func",
         "define"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0.2],
       "topics": ["python-basics"]
     },
     {
@@ -37,7 +37,7 @@
         "7",
         "Error"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["python-basics"]
     },
     {
@@ -50,7 +50,7 @@
         "Pauses the loop",
         "Restarts the loop"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["python-basics"]
     },
     {
@@ -64,7 +64,7 @@
         "1\n2",
         "0\n1"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["python-basics"]
     },
     {
@@ -77,7 +77,7 @@
         "To define class names",
         "To name variables"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0.4, 1, 0, 0],
       "topics": ["python-basics"]
     },
     {
@@ -90,7 +90,7 @@
         "variable-name",
         "variable name"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["python-basics"]
     },
     {
@@ -104,9 +104,21 @@
         "5",
         "Error"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 103,
+      "type": "Multiple Select",
+      "question": "Which of the following are valid Python variable names? (Select all that apply)",
+      "answers": [
+        "hello_world",
+        "six7",
+        "7six",
+        "test-variable"
+      ],
+      "answerScores": [0.5, 0.5, -0.7, -0.3],
       "topics": ["python-basics"]
     }
   ]
 }
-

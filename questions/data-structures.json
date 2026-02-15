@@ -10,7 +10,7 @@
         "Set",
         "Tuple"
       ],
-      "correctAnswer": 3,
+      "answerScores": [0, 0, 0, 1],
       "topics": ["data-structures"]
     },
     {
@@ -24,7 +24,7 @@
         "[2, 3, 4, 5]",
         "[1, 2, 3, 4]"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["data-structures"]
     },
     {
@@ -37,7 +37,7 @@
         "Set",
         "String"
       ],
-      "correctAnswer": 2,
+      "answerScores": [0.2, 0.2, 1, 0.1],
       "topics": ["data-structures"]
     },
     {
@@ -51,7 +51,7 @@
         "4",
         "Error"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["data-structures"]
     },
     {
@@ -65,7 +65,7 @@
         "4",
         "Error"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["data-structures"]
     },
     {
@@ -78,7 +78,7 @@
         "insert()",
         "push()"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0.3, 0],
       "topics": ["data-structures"]
     }
   ]

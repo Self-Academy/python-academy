@@ -10,7 +10,7 @@
         "To create a class variable",
         "To import modules"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0.3, 0],
       "topics": ["oop"]
     },
     {
@@ -24,7 +24,7 @@
         "Buddy says Woof!",
         "Error"
       ],
-      "correctAnswer": 2,
+      "answerScores": [0, 0, 1, 0],
       "topics": ["oop"]
     },
     {
@@ -37,7 +37,7 @@
         "Hiding data from other classes",
         "Running code in parallel"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0.2, 1, 0.4, 0],
       "topics": ["oop"]
     },
     {
@@ -51,7 +51,7 @@
         "None",
         "Error"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0, 0],
       "topics": ["oop"]
     },
     {
@@ -64,7 +64,7 @@
         "Creating multiple classes",
         "Importing external modules"
       ],
-      "correctAnswer": 1,
+      "answerScores": [0, 1, 0.3, 0],
       "topics": ["oop"]
     },
     {
@@ -78,7 +78,7 @@
         "2",
         "Error"
       ],
-      "correctAnswer": 2,
+      "answerScores": [0, 0, 1, 0],
       "topics": ["oop"]
     }
   ]
