@@ -1,0 +1,33 @@
+{
+  "questions": [
+    {
+      "id": 2,
+      "type": "Code Analysis",
+      "question": "What will be printed by this code?",
+      "code": "x = 5\ny = 10\nx, y = y, x\nprint(x, y)",
+      "answers": [
+        "5 10",
+        "10 5",
+        "10 10",
+        "5 5"
+      ],
+      "correctAnswer": 1,
+      "topics": ["python-basics", "data-structures"]
+    },
+    {
+      "id": 21,
+      "type": "Code Analysis",
+      "question": "What will this code output?",
+      "code": "my_dict = {'a': 1, 'b': 2, 'c': 3}\nfor key, value in my_dict.items():\n    if value == 2:\n        break\n    print(key, value)",
+      "answers": [
+        "a 1\nb 2\nc 3",
+        "a 1",
+        "b 2",
+        "a 1\nc 3"
+      ],
+      "correctAnswer": 1,
+      "topics": ["data-structures", "python-basics"]
+    }
+  ]
+}
+

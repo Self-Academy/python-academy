@@ -1,0 +1,85 @@
+{
+  "questions": [
+    {
+      "id": 112,
+      "type": "Theory",
+      "question": "What is the time complexity of searching for an element in a sorted list using binary search?",
+      "answers": [
+        "O(n)",
+        "O(log n)",
+        "O(n²)",
+        "O(1)"
+      ],
+      "correctAnswer": 1,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 113,
+      "type": "Code Analysis",
+      "question": "What sorting algorithm does Python's sorted() function use?",
+      "answers": [
+        "Quick Sort",
+        "Bubble Sort",
+        "Timsort",
+        "Merge Sort"
+      ],
+      "correctAnswer": 2,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 114,
+      "type": "Theory",
+      "question": "Which algorithm strategy divides a problem into smaller subproblems?",
+      "answers": [
+        "Greedy",
+        "Divide and Conquer",
+        "Brute Force",
+        "Backtracking"
+      ],
+      "correctAnswer": 1,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 115,
+      "type": "Code Analysis",
+      "question": "What will this code return?",
+      "code": "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)\n\nprint(fibonacci(5))",
+      "answers": [
+        "3",
+        "5",
+        "8",
+        "13"
+      ],
+      "correctAnswer": 1,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 116,
+      "type": "Theory",
+      "question": "What is the best case time complexity of QuickSort?",
+      "answers": [
+        "O(n)",
+        "O(n log n)",
+        "O(n²)",
+        "O(log n)"
+      ],
+      "correctAnswer": 1,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 117,
+      "type": "Code Analysis",
+      "question": "What does this function calculate?",
+      "code": "def mystery(lst):\n    result = lst[0]\n    for num in lst[1:]:\n        if num > result:\n            result = num\n    return result",
+      "answers": [
+        "Sum of list",
+        "Average of list",
+        "Maximum value in list",
+        "Length of list"
+      ],
+      "correctAnswer": 2,
+      "topics": ["algorithms"]
+    }
+  ]
+}
+

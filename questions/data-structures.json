@@ -1,0 +1,86 @@
+{
+  "questions": [
+    {
+      "id": 7,
+      "type": "Theory",
+      "question": "Which of the following data structures is immutable in Python?",
+      "answers": [
+        "List",
+        "Dictionary",
+        "Set",
+        "Tuple"
+      ],
+      "correctAnswer": 3,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 8,
+      "type": "Code Analysis",
+      "question": "What is the output of this code?",
+      "code": "my_list = [1, 2, 3, 4, 5]\nprint(my_list[1:4])",
+      "answers": [
+        "[1, 2, 3]",
+        "[2, 3, 4]",
+        "[2, 3, 4, 5]",
+        "[1, 2, 3, 4]"
+      ],
+      "correctAnswer": 1,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 108,
+      "type": "Theory",
+      "question": "Which data structure would be most efficient for checking membership (e.g., 'x in container')?",
+      "answers": [
+        "List",
+        "Tuple",
+        "Set",
+        "String"
+      ],
+      "correctAnswer": 2,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 109,
+      "type": "Code Analysis",
+      "question": "What will be the output?",
+      "code": "my_dict = {'a': 1, 'b': 2}\nmy_dict['c'] = 3\nprint(len(my_dict))",
+      "answers": [
+        "2",
+        "3",
+        "4",
+        "Error"
+      ],
+      "correctAnswer": 1,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 110,
+      "type": "Code Analysis",
+      "question": "What is the result?",
+      "code": "s = {1, 2, 3, 3, 4, 4, 5}\nprint(len(s))",
+      "answers": [
+        "7",
+        "5",
+        "4",
+        "Error"
+      ],
+      "correctAnswer": 1,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 111,
+      "type": "Theory",
+      "question": "What method adds an element to the end of a list?",
+      "answers": [
+        "add()",
+        "append()",
+        "insert()",
+        "push()"
+      ],
+      "correctAnswer": 1,
+      "topics": ["data-structures"]
+    }
+  ]
+}
+
