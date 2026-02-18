@@ -29,7 +29,206 @@
       "answerScores": [-0.33, 1, -0.33, -0.33],
       "multipleChoice": false,
       "topics": ["data-structures", "python-basics"]
+    },
+    {
+      "id": 300,
+      "type": "Multiple Select",
+      "question": "Which statements about exception handling and file I/O are correct? (Select all that apply)",
+      "answers": [
+        "Using 'with open(...)' ensures the file is closed even if an exception occurs",
+        "'try-except-else' runs else only if no exception is raised",
+        "'finally' executes only when an exception occurs",
+        "Catching broad exceptions with 'except Exception' can mask errors"
+      ],
+      "answerScores": [0.34, 0.33, -0.34, 0.33],
+      "multipleChoice": true,
+      "topics": ["exception-handling", "standard-library"]
+    },
+    {
+      "id": 302,
+      "type": "Multiple Select",
+      "question": "Which data structures maintain insertion order in modern Python? (Select all that apply)",
+      "answers": ["list", "dict", "set", "tuple"],
+      "answerScores": [0.34, 0.33, -0.34, 0.33],
+      "multipleChoice": true,
+      "topics": ["data-structures", "python-basics"]
+    },
+    {
+      "id": 303,
+      "type": "Code Analysis",
+      "question": "Given the code, what is the output?",
+      "code": "def f(seq):\n    try:\n        return seq[2]\n    except (IndexError, TypeError):\n        return 'X'\n\nprint(f([0,1,2,3]))\nprint(f((0,1)))\nprint(f('abc'))",
+      "answers": ["2\nX\nX", "2\nX\nc", "2\n2\nX", "X\nX\nc"],
+      "answerScores": [1, -0.33, -0.5, -0.5],
+      "multipleChoice": false,
+      "topics": ["exception-handling", "data-structures"]
+    },
+    {
+      "id": 306,
+      "type": "Code Analysis",
+      "question": "What will be printed?",
+      "code": "arr = [5,3,1,4,2]\narr.sort()\nprint(arr[:3])",
+      "answers": ["[1,2,3]", "[1,3,5]", "[5,3,1]", "Error"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures", "algorithms"]
+    },
+    {
+      "id": 307,
+      "type": "Code Analysis",
+      "question": "What is the output for this fragment?",
+      "code": "import math\nclass Circle:\n    def __init__(self, r):\n        self.r = r\n    def area(self):\n        return math.pi * self.r * self.r\n\nprint(round(Circle(2).area(), 2))",
+      "answers": ["12.57", "12.56", "6.28", "Error"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["oop", "standard-library"]
+    },
+    {
+      "id": 309,
+      "type": "Code Analysis",
+      "question": "Consider the combined flow: exceptions, list ops, and control flow—what prints?",
+      "code": "def run(xs):\n    out = []\n    for x in xs:\n        try:\n            if x % 2 == 0:\n                out.append(x)\n            else:\n                raise ValueError('odd')\n        except Error as e:\n            print('Error')\n    return out\n\nprint(run([1,2,3,4,5]))",
+      "answers": ["Error\nError\nError\n[2,4]", "[1,3,5]", "[2,3,4]", "[2,4]\nError\nError\nError"],
+      "answerScores": [1, -0.5, -0.5, -0.33],
+      "multipleChoice": false,
+      "topics": ["exception-handling", "data-structures"]
+    },
+    {
+      "id": 310,
+      "type": "Theory",
+      "question": "Which statement best describes Python's list.sort vs sorted?",
+      "answers": [
+        "list.sort sorts in-place and returns None; sorted returns a new list",
+        "Both return a new list (leave the original list untouched) but list.sort uses a fixed algorithm while sorted picks an algorithm based on input",
+        "Both sort in-place but list.sort uses a fixed algorithm while sorted picks an algorithm based on input",
+        "sorted works only on tuples"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["algorithms", "data-structures"]
+    },
+    {
+      "id": 311,
+      "type": "Multiple Select",
+      "question": "Which import statements are valid? (Select all that apply)",
+      "answers": ["import math", "from math import pi", "import math.pi", "from math import *"],
+      "answerScores": [0.33, 0.34, -0.34, 0.33],
+      "multipleChoice": true,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 312,
+      "type": "Code Analysis",
+      "question": "What does this code output?",
+      "code": "class Bag:\n    def __init__(self):\n        self.items = []\n    def add(self, x):\n        self.items.append(x)\n    def size(self):\n        return len(self.items)\n\nb = Bag()\nb.add('a'); b.add('b')\nprint(b.size())",
+      "answers": ["2", "1", "3", "Error"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["oop", "data-structures"]
+    },
+    {
+      "id": 313,
+      "type": "Multiple Select",
+      "question": "Which of the following operations are safe (no possibility for exceptions) on sets and dicts? (Select all that apply)",
+      "answers": ["set.add(x)", "set[0]", "dict.get('k')", "dict['missing']"],
+      "answerScores": [0.34, -0.34, 0.33, -0.33],
+      "multipleChoice": true,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 314,
+      "type": "Theory",
+      "question": "Which algorithmic paradigm best fits merge sort?",
+      "answers": ["Divide and Conquer", "Dynamic Programming", "Greedy", "Backtracking"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 315,
+      "type": "Code Analysis",
+      "question": "What does this code print?",
+      "code": "import json\ntry:\n    print(json.loads('{\"a\":1}\"'))\nexcept json.JSONDecodeError:\n    print('bad')",
+      "answers": ["{'a': 1}", "bad", "Error", "None"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["exception-handling", "standard-library"]
+    },
+    {
+      "id": 316,
+      "type": "Multiple Select",
+      "question": "Which of the following statements about list slicing are true? (Select all that apply) assume lst contains [0,1,2,3]",
+      "answers": ["lst[::-1] reverses a list", "lst[:]=[] clears a list", "lst[::0] is valid", "lst[1:1] returns []"],
+      "answerScores": [0.34, 0.33, -0.34, 0.33],
+      "multipleChoice": true,
+      "topics": ["python-basics", "data-structures"]
+    },
+    {
+      "id": 317,
+      "type": "Code Analysis",
+      "question": "What will be printed?",
+      "code": "try:\n    d = {'a':1}\n    print(d['b'])\nexcept KeyError:\n    print('missing')",
+      "answers": ["missing", "KeyError", "1", "Error"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["exception-handling", "data-structures"]
+    },
+    {
+      "id": 318,
+      "type": "Theory",
+      "question": "Which description best fits tuples in Python?",
+      "answers": ["Immutable sequences", "Mutable mappings", "Mutable sequences", "Immutable sets"],
+      "answerScores": [1, -0.5, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 319,
+      "type": "Multiple Select",
+      "question": "Which of the following datetime operations are valid? (Select all that apply)",
+      "answers": ["datetime.now()", "date.today()", "time.sleep(1) returns a datetime", "timedelta(days=1)"],
+      "answerScores": [0.33, 0.34, -0.34, 0.33],
+      "multipleChoice": true,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 320,
+      "type": "Code Analysis",
+      "question": "What is the output of this code?",
+      "code": "xs = [1,2,3,4]\nys = [x for x in xs if x % 2]\nprint(ys)",
+      "answers": ["[1,3]", "[2,4]", "[1,2,3,4]", "Error"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["python-basics", "algorithms"]
+    },
+    {
+      "id": 321,
+      "type": "Multiple Select",
+      "question": "Which are valid dictionary iteration patterns? (Select all that apply)",
+      "answers": ["for k in d", "for k, v in d.items()", "for i in range(d)", "for v in d.values()"],
+      "answerScores": [0.34, 0.33, -0.34, 0.33],
+      "multipleChoice": true,
+      "topics": ["data-structures", "python-basics"]
+    },
+    {
+      "id": 322,
+      "type": "Code Analysis",
+      "question": "What does this snippet print?",
+      "code": "class Parser:\n    def parse(self, s):\n        if not isinstance(s, str):\n            raise TypeError('needs str')\n        return s.upper()\n\ntry:\n    print(Parser().parse('ok'))\n    Parser().parse(10)\nexcept TypeError:\n    print('bad')",
+      "answers": ["OK\nbad", "bad\nOK", "OK\nOK", "bad\nbad"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["oop", "exception-handling"]
+    },
+    {
+      "id": 324,
+      "type": "Code Analysis",
+      "question": "What prints in this mixed code?",
+      "code": "def g(s):\n    try:\n        return s[1:3]\n    except TypeError:\n        return []\n\nprint(g('abcd'))\nprint(g(10))",
+      "answers": ["['b','c']\n[]", "bc\n[]", "['b','c']\nError", "Error"],
+      "answerScores": [0.5, 1, -0.5, -0.5],
+      "multipleChoice": false,
+      "topics": ["exception-handling", "python-basics"]
     }
   ]
 }
-

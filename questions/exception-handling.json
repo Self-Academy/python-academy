@@ -85,7 +85,82 @@
       "answerScores": [-0.33, -0.33, 1, -0.33],
       "multipleChoice": false,
       "topics": ["exception-handling"]
+    },
+    {
+      "id": 401,
+      "type": "Theory",
+      "question": "Which block runs completely regardless of whether an exception occurs?",
+      "answers": ["try", "except", "else", "finally"],
+      "answerScores": [-0.33, -0.33, -0.33, 1],
+      "multipleChoice": false,
+      "topics": ["exception-handling"]
+    },
+    {
+      "id": 402,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "try:\n    x = 1/0\nexcept ZeroDivisionError:\n    print('z')\nelse:\n    print('ok')\nfinally:\n    print('done')",
+      "answers": ["ok\ndone", "z\ndone", "z", "done"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["exception-handling"]
+    },
+    {
+      "id": 403,
+      "type": "Multiple Select",
+      "question": "Which practices are recommended when catching exceptions? (Select all that apply)",
+      "answers": [
+        "Catch specific exceptions",
+        "Use broad 'except:' without care",
+        "Log or handle the exception meaningfully",
+        "Silently ignore errors by pass"
+      ],
+      "answerScores": [0.34, -0.34, 0.33, -0.33],
+      "multipleChoice": true,
+      "topics": ["exception-handling"]
+    },
+    {
+      "id": 404,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "def f():\n    try:\n        raise ValueError('x')\n    except ValueError as e:\n        return str(e)\n\nprint(f())",
+      "answers": ["x", "ValueError", "None", "Error"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["exception-handling"]
+    },
+    {
+      "id": 405,
+      "type": "Multiple Select",
+      "question": "Which statements about try/except/else/finally are true? (Select all that apply)",
+      "answers": [
+        "else executes only if no exception is raised",
+        "finally executes whether or not an exception occurs",
+        "except can be chained to catch multiple types",
+        "try cannot be nested"
+      ],
+      "answerScores": [0.33, 0.34, 0.33, -0.34],
+      "multipleChoice": true,
+      "topics": ["exception-handling"]
+    },
+    {
+      "id": 406,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "try:\n    d = {}\n    print(d['a'])\nexcept KeyError:\n    print('missing')\nfinally:\n    print('end')",
+      "answers": ["missing\nend", "end\nmissing", "missing", "end"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["exception-handling"]
+    },
+    {
+      "id": 408,
+      "type": "Multiple Select",
+      "question": "Which strategies help avoid masking exceptions? (Select all that apply)",
+      "answers": ["Catch specific exceptions", "Re-raise after logging when appropriate", "Use bare except to catch all", "Add context to error messages"],
+      "answerScores": [0.33, 0.34, -0.34, 0.33],
+      "multipleChoice": true,
+      "topics": ["exception-handling"]
     }
   ]
 }
-

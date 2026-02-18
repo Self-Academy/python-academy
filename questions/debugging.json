@@ -1,0 +1,21 @@
+{
+  "questions": [
+    {
+      "id": 9002,
+      "type": "Debugging Scenario",
+      "question": "The following function is intended to compute n! (factorial). It behaves incorrectly for some inputs. Identify which issues may be present in the code below.",
+      "code": "def factorial(n):\n    total = 1\n    i = 1\n    while i < n:\n        total = total * i\n        i += 1\n    return str(total)\n\nassert factorial('5') == 120",
+      "answers": [
+        "Function uses '<' leading to an off-by-one: loop should include n",
+        "It converts the final result to str instead of returning an int",
+        "It multiplies by i where it should add i",
+        "Passing string arguments will cause errors",
+        "Initialization of i should start at 0 instead of 1",
+        "Function only works with a for loop, not a while loop"
+      ],
+      "answerScores": [0.34, 0.33, -0.33, 0.33, -0.33, -0.34],
+      "multipleChoice": true,
+      "topics": ["debugging"]
+    }
+  ]
+}

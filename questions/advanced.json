@@ -86,7 +86,207 @@
       "answerScores": [-0.33, 1, -0.33, -0.33],
       "multipleChoice": false,
       "topics": ["advanced"]
+    },
+    {
+      "id": 601,
+      "type": "Multiple Select",
+      "question": "Which statements about decorators are correct? (Select all that apply)",
+      "answers": [
+        "Decorators can wrap functions to modify behavior",
+        "Decorators must always return None",
+        "@decorator is syntactic sugar for func = decorator(func)",
+        "Decorators cannot accept arguments"
+      ],
+      "answerScores": [0.34, -0.34, 0.33, -0.33],
+      "multipleChoice": true,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 602,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "def make_adder(n):\n    def add(x):\n        return x + n\n    return add\n\nadd5 = make_adder(5)\nprint(add5(3))",
+      "answers": [
+        "8",
+        "5",
+        "3",
+        "Error"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 603,
+      "type": "Theory",
+      "question": "Which statement about closures is correct?",
+      "answers": [
+        "Closures cannot access outer variables",
+        "Closures retain bindings from their defining scope",
+        "Closures only work with classes",
+        "Closures are thread-only"
+      ],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 604,
+      "type": "Multiple Select",
+      "question": "Which generator characteristics are correct? (Select all that apply)",
+      "answers": [
+        "Generators yield values lazily",
+        "Generators cannot be iterated",
+        "Generators can be exhausted",
+        "Generators always return lists"
+      ],
+      "answerScores": [0.34, -0.34, 0.33, -0.33],
+      "multipleChoice": true,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 605,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "def gen(n):\n    for i in range(n):\n        yield i\n\nprint(sum(gen(3)))",
+      "answers": [
+        "3",
+        "6",
+        "[0,1,2]",
+        "Error"
+      ],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 606,
+      "type": "Theory",
+      "question": "Which statement about context managers is true?",
+      "answers": [
+        "They require defining __enter__ and __exit__",
+        "They cannot be used with files",
+        "They stop exceptions from propagating",
+        "They are slower than manual cleanup"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 607,
+      "type": "Multiple Select",
+      "question": "Which 'with' usage patterns are valid? (Select all that apply)",
+      "answers": [
+        "with open('f') as f:",
+        "with resource() as r:",
+        "with lock.acquire():",
+        "with ctx as x:"
+      ],
+      "answerScores": [0.34, 0.33, -0.34, 0.33],
+      "multipleChoice": true,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 608,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "def f(items):\n    return [x for x in items if x % 2 == 0]\n\nprint(f([1,2,3,4]))",
+      "answers": [
+        "[2,4]",
+        "[1,3]",
+        "[1,2,3,4]",
+        "Error"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 609,
+      "type": "Theory",
+      "question": "Which statement about comprehensions is correct?",
+      "answers": [
+        "Dict comprehensions build mappings",
+        "List comprehensions cannot filter",
+        "Set comprehensions return lists",
+        "Comprehensions are always slower than loops"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 610,
+      "type": "Multiple Select",
+      "question": "Which statements about the nonlocal and global keywords are true? (Select all that apply)",
+      "answers": [
+        "nonlocal binds to an enclosing scope variable",
+        "global binds to a module-level name",
+        "nonlocal can create new variables",
+        "global can create a new variable"
+      ],
+      "answerScores": [0.34, 0.33, -0.34, 0.33],
+      "multipleChoice": true,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 611,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "it = iter([1,2,3])\nprint(next(it), next(it))",
+      "answers": [
+        "1 2",
+        "2 3",
+        "1 3",
+        "Error"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 612,
+      "type": "Theory",
+      "question": "Which magic method(s) influences string representation?",
+      "answers": [
+        "__str__",
+        "__repr__",
+        "__format__",
+        "__lt__"
+      ],
+      "answerScores": [0.33, 0.34, 0.33, -0.34],
+      "multipleChoice": true,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 614,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "def deco(f):\n    def wrapped(*args, **kwargs):\n        return f(*args, **kwargs) + 1\n    return wrapped\n\n@deco\ndef base():\n    return 1\n\nprint(base())",
+      "answers": [
+        "2",
+        "1",
+        "Error",
+        "None"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["advanced"]
+    },
+    {
+      "id": 615,
+      "type": "Theory",
+      "question": "Which iterator protocol methods are required for custom iterables?",
+      "answers": [
+        "__iter__ and __next__",
+        "__len__ and __getitem__",
+        "__iter__ only",
+        "__next__ only"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["advanced"]
     }
   ]
 }
-
