@@ -10,7 +10,7 @@
         "get_input()",
         "read()"
       ],
-      "answerScores": [1, 0.5, -0.33, -0.33],
+      "answerScores": [1, -0.33, -0.33, -0.33],
       "multipleChoice": false,
       "topics": ["python-basics"]
     },
@@ -73,20 +73,6 @@
       "topics": ["python-basics"]
     },
     {
-      "id": 13,
-      "type": "Theory",
-      "question": "What is the purpose of the '__name__' variable in Python?",
-      "answers": [
-        "To store the program name",
-        "To check if a script is run directly or imported",
-        "To define class names",
-        "To name variables"
-      ],
-      "answerScores": [0.5, 1, -0.33, -0.33],
-      "multipleChoice": false,
-      "topics": ["python-basics"]
-    },
-    {
       "id": 101,
       "type": "Theory",
       "question": "Which of the following is a valid variable name in Python?",
@@ -121,11 +107,227 @@
       "question": "Which of the following are valid Python variable names? (Select all that apply)",
       "answers": [
         "hello_world",
-        "six7",
-        "7six",
+        "v2",
+        "7up",
         "test-variable"
       ],
       "answerScores": [0.5, 0.5, -0.5, -0.5],
+      "multipleChoice": true,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 122,
+      "type": "Theory",
+      "question": "Which statement correctly creates a list in Python?",
+      "answers": [
+        "list = (1, 2, 3)",
+        "my_list = [1, 2, 3]",
+        "list = {1, 2, 3}",
+        "my_list = <1,2,3>"
+      ],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 123,
+      "type": "Multiple Select",
+      "question": "Which of the following are valid ways to format strings to print 'hello Alice'? (Select all that apply) assume name = 'Alice'",
+      "answers": [
+        "f'hello {name}'",
+        "'hello %s' % name",
+        "'hello'.concat(name)",
+        "'hello {name}'.format(name=name)"
+      ],
+      "answerScores": [0.34, 0.33, -0.34, 0.33],
+      "multipleChoice": true,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 124,
+      "type": "Code Analysis",
+      "question": "What does this code print?",
+      "code": "x = 5\nprint(type(x))",
+      "answers": [
+        "<class 'int'>",
+        "<class 'number'>",
+        "assignment",
+        "type"
+      ],
+      "answerScores": [1, -0.33, 0.5, -0.33],
+      "multipleChoice": false,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 125,
+      "type": "Theory",
+      "question": "Which of the following built-in types are mutable? (Select all that apply)",
+      "answers": [
+        "list",
+        "tuple",
+        "dict",
+        "str"
+      ],
+      "answerScores": [0.5, -0.5, 0.5, -0.5],
+      "multipleChoice": true,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 126,
+      "type": "Theory",
+      "question": "Which statement about Python indentation is correct?",
+      "answers": [
+        "Tabs are required",
+        "Indentation defines block structure",
+        "Indentation is optional",
+        "Curly braces define blocks"
+      ],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 127,
+      "type": "Code Analysis",
+      "question": "What will be printed?",
+      "code": "items = ['a','b']\nitems.append('c')\nprint(len(items))",
+      "answers": [
+        "2",
+        "3",
+        "4",
+        "Error"
+      ],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 128,
+      "type": "Multiple Select",
+      "question": "Which of the following are valid ways to create a dictionary? (Select all that apply)",
+      "answers": [
+        "{}",
+        "dict()",
+        "set()",
+        "[]"
+      ],
+      "answerScores": [0.5, 0.5, -0.5, -0.5],
+      "multipleChoice": true,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 129,
+      "type": "Theory",
+      "question": "Which of the following calls correctly declares a function?",
+      "answers": [
+        "def myFunc():",
+        "function myFunc():",
+        "def myFunc:()",
+        "function myFunc():"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 130,
+      "type": "Code Analysis",
+      "question": "What does this code print?",
+      "code": "nums = [1,2,3]\nprint(nums[0] + nums[-1])",
+      "answers": [
+        "2",
+        "3",
+        "4",
+        "Error"
+      ],
+      "answerScores": [-0.33, -0.33, 1, -0.33],
+      "multipleChoice": false,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 131,
+      "type": "Multiple Select",
+      "question": "Which of the following raise exceptions when a is not a key in the collection? (Select all that apply)",
+      "answers": [
+        "dict['a']",
+        "dict.get('a')",
+        "defaultdict()['a']",
+        "dict('a': 'b')['a']"
+      ],
+      "answerScores": [0.5, -0.5, 0.5, -0.5],
+      "multipleChoice": true,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 132,
+      "type": "Theory",
+      "question": "Which of the following is true about Python variables?",
+      "answers": [
+        "They must be declared with type",
+        "They can change type",
+        "They cannot be reassigned",
+        "They require the var keyword to declare"
+      ],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 133,
+      "type": "Code Analysis",
+      "question": "What will be printed?",
+      "code": "s = 'py' + 'thon'\nprint(s)",
+      "answers": [
+        "python",
+        "py thon",
+        "py",
+        "thon"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["python-basics"]
+    },
+
+    {
+      "id": 135,
+      "type": "Theory",
+      "question": "Which statement about lists and tuples is correct?",
+      "answers": [
+        "Tuples are mutable; lists are immutable",
+        "Lists are mutable; tuples are immutable",
+        "Both are mutable",
+        "Both are immutable"
+      ],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 136,
+      "type": "Code Analysis",
+      "question": "What does this code print?",
+      "code": "d = {'a':1}\nprint('a' in d)",
+      "answers": [
+        "True",
+        "False",
+        "1",
+        "Error"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["python-basics"]
+    },
+    {
+      "id": 137,
+      "type": "Multiple Select",
+      "question": "Which are valid ways to iterate indexes in a list? (Select all that apply)",
+      "answers": [
+        "for i in range(len(lst))",
+        "for i, _ in enumerate(lst)",
+        "for i in lst.indexes",
+        "i = 0; while i < len(lst): i++"
+      ],
+      "answerScores": [0.5, 0.25, -0.34, 0.25],
       "multipleChoice": true,
       "topics": ["python-basics"]
     }

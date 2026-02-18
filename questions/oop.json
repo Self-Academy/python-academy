@@ -86,7 +86,154 @@
       "answerScores": [-0.33, -0.33, 1, -0.33],
       "multipleChoice": false,
       "topics": ["oop"]
+    },
+    {
+      "id": 200,
+      "type": "Theory",
+      "question": "Which term describes a method with the same name in a subclass overriding the parent behavior?",
+      "answers": [
+        "Polymorphism",
+        "Overriding",
+        "Overloading",
+        "Abstraction"
+      ],
+      "answerScores": [0.5, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["oop"]
+    },
+    {
+      "id": 201,
+      "type": "Multiple Select",
+      "question": "Which statements about inheritance are correct? (Select all that apply)",
+      "answers": [
+        "a class can extend multiple base classes",
+        "function overloading does not require inheritance",
+        "super() calls the base class initializer",
+        "A subclass cannot access base class attributes"
+      ],
+      "answerScores": [0.34, 0.33, 0.33, -0.34],
+      "multipleChoice": true,
+      "topics": ["oop"]
+    },
+    {
+      "id": 202,
+      "type": "Code Analysis",
+      "question": "What is the output?",
+      "code": "class A:\n    def f(self):\n        return 'A'\nclass B(A):\n    def f(self):\n        return 'B'\nprint(B().f())",
+      "answers": [
+        "A",
+        "B",
+        "AB",
+        "Error"
+      ],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["oop"]
+    },
+    {
+      "id": 203,
+      "type": "Multiple Select",
+      "question": "Which are common OOP principles? (Select all that apply)",
+      "answers": [
+        "Encapsulation",
+        "Polymorphism",
+        "Randomization",
+        "Inheritance"
+      ],
+      "answerScores": [0.33, 0.34, -0.34, 0.33],
+      "multipleChoice": true,
+      "topics": ["oop"]
+    },
+    {
+      "id": 204,
+      "type": "Code Analysis",
+      "question": "What will print?",
+      "code": "class P:\n    def __init__(self,x):\n        self.x = x\n    def __repr__(self):\n        return f'P({self.x})'\nprint(P(3))",
+      "answers": [
+        "P(3)",
+        "3",
+        "P",
+        "Error"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["oop"]
+    },
+    {
+      "id": 206,
+      "type": "Multiple Select",
+      "question": "Which special methods customize object behavior? (Select all that apply)",
+      "answers": [
+        "__len__",
+        "__iter__",
+        "__random__",
+        "__add__"
+      ],
+      "answerScores": [0.33, 0.33, -0.34, 0.34],
+      "multipleChoice": true,
+      "topics": ["oop"]
+    },
+    {
+      "id": 207,
+      "type": "Code Analysis",
+      "question": "What is printed?",
+      "code": "class V:\n    def __init__(self):\n        self._x = 1\n    @property\n    def x(self):\n        return self._x\nprint(V().x)",
+      "answers": ["1", "_x", "x", "Error"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["oop"]
+    },
+    {
+      "id": 208,
+      "type": "Theory",
+      "question": "What is the main purpose of the __repr__ attribute?",
+      "answers": [
+        "Human-friendly string",
+        "Unambiguous representation",
+        "Memory address",
+        "Logging only"
+      ],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["oop"]
+    },
+    {
+      "id": 210,
+      "type": "Code Analysis",
+      "question": "What is printed?",
+      "code": "class Base:\n    def __init__(self):\n        self.v = 1\nclass Child(Base):\n    def __init__(self):\n        super().__init__()\n        self.v += 1\nprint(Child().v)",
+      "answers": ["1", "2", "0", "Error"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["oop"]
+    },
+    {
+      "id": 211,
+      "type": "Theory",
+      "question": "Which term best fits objects presenting the same interface but different implementations?",
+      "answers": [
+        "Encapsulation",
+        "Polymorphism",
+        "Inheritance",
+        "Aggregation"
+      ],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["oop"]
+    },
+    {
+      "id": 212,
+      "type": "Multiple Select",
+      "question": "Which statements about __init__ and __new__ are correct? (Select all that apply)",
+      "answers": [
+        "__new__ creates the instance",
+        "__init__ initializes attributes",
+        "__new__ is called after __init__",
+        "__init__ returns the new instance"
+      ],
+      "answerScores": [0.34, 0.33, -0.34, -0.33],
+      "multipleChoice": true,
+      "topics": ["oop"]
     }
   ]
 }
-

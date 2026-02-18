@@ -85,7 +85,190 @@
       "answerScores": [-0.33, 1, -0.33, -0.33],
       "multipleChoice": false,
       "topics": ["standard-library"]
+    },
+    {
+      "id": 801,
+      "type": "Theory",
+      "question": "Which module loads JSON strings into Python objects?",
+      "answers": [
+        "json",
+        "pickle",
+        "marshal",
+        "csv"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 802,
+      "type": "Multiple Select",
+      "question": "Which statements about datetime are true? (Select all that apply)",
+      "answers": [
+        "datetime.now() returns current timestamp",
+        "timedelta can represent durations",
+        "date.today() returns a date",
+        "datetime.sleep() pauses execution"
+      ],
+      "answerScores": [0.33, 0.34, 0.33, -0.34],
+      "multipleChoice": true,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 804,
+      "type": "Theory",
+      "question": "Which module provides mathematical constants like pi?",
+      "answers": [
+        "math",
+        "statistics",
+        "random",
+        "numbers"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 807,
+      "type": "Theory",
+      "question": "Which module offers specialized container types like deque and Counter?",
+      "answers": [
+        "collections",
+        "itertools",
+        "functools",
+        "array"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 810,
+      "type": "Theory",
+      "question": "Which module is typically used for spawning subprocesses?",
+      "answers": [
+        "subprocess",
+        "os",
+        "sys",
+        "pathlib"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 811,
+      "type": "Multiple Select",
+      "question": "Which statistics module functions compute aggregates? (Select all that apply)",
+      "answers": [
+        "mean",
+        "median",
+        "mode",
+        "floor"
+      ],
+      "answerScores": [0.33, 0.34, 0.33, -0.34],
+      "multipleChoice": true,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 813,
+      "type": "Theory",
+      "question": "Which module provides caching tools like lru_cache?",
+      "answers": [
+        "functools",
+        "itertools",
+        "collections",
+        "cache"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 814,
+      "type": "Multiple Select",
+      "question": "Which sys operations are common? (Select all that apply)",
+      "answers": [
+        "sys.argv access",
+        "sys.exit",
+        "sys.path manipulation",
+        "sys.random()"
+      ],
+      "answerScores": [0.34, 0.33, 0.33, -0.34],
+      "multipleChoice": true,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 815,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "from math import floor\nprint(floor(3.9))",
+      "answers": [
+        "3",
+        "4",
+        "3.9",
+        "Error"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 817,
+      "type": "Multiple Select",
+      "question": "Which operations are valid with random module? (Select all that apply)",
+      "answers": [
+        "random.random()",
+        "random.randint(a,b)",
+        "random.shuffle(seq)",
+        "random.ceil(x)"
+      ],
+      "answerScores": [0.33, 0.34, 0.33, -0.34],
+      "multipleChoice": true,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 818,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "from collections import Counter\nprint(Counter('aba'))",
+      "answers": [
+        "Counter({'a':2,'b':1})",
+        "{'a':2,'b':1}",
+        "Error",
+        "None"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 819,
+      "type": "Theory",
+      "question": "Which module provides URL parsing utilities?",
+      "answers": [
+        "urllib",
+        "http",
+        "requests",
+        "socket"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["standard-library"]
+    },
+    {
+      "id": 820,
+      "type": "Multiple Select",
+      "question": "Which os operations are valid and common? (Select all that apply)",
+      "answers": [
+        "os.listdir",
+        "os.environ",
+        "os.remove",
+        "os.random()"
+      ],
+      "answerScores": [0.33, 0.34, 0.33, -0.34],
+      "multipleChoice": true,
+      "topics": ["standard-library"]
     }
   ]
 }
-

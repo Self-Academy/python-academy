@@ -85,7 +85,137 @@
       "answerScores": [-0.33, -0.33, 1, -0.33],
       "multipleChoice": false,
       "topics": ["algorithms"]
+    },
+    {
+      "id": 701,
+      "type": "Theory",
+      "question": "Which sorting algorithm is used by default in Python's sorted function?",
+      "answers": [
+        "QuickSort",
+        "Timsort (Merge sort + Insertion sort hybrid)",
+        "HeapSort",
+        "Selection Sort"
+      ],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 703,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "arr = [3,1,4,2]\nprint(sorted(arr)[0])",
+      "answers": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 706,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "def bs(xs, t):\n    lo, hi = 0, len(xs)-1\n    while lo <= hi:\n        mid = (lo+hi)//2\n        if xs[mid] == t:\n            return mid\n        elif xs[mid] < t:\n            lo = mid+1\n        else:\n            hi = mid-1\n    return -1\n\nprint(bs([1,2,3,4], 3))",
+      "answers": [
+        "2",
+        "3",
+        "-1",
+        "Error"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 708,
+      "type": "Multiple Select",
+      "question": "Which are divide-and-conquer algorithms? (Select all that apply)",
+      "answers": [
+        "Merge Sort",
+        "QuickSort",
+        "Linear search",
+        "Binary search"
+      ],
+      "answerScores": [0.33, 0.33, -0.34, 0.34],
+      "multipleChoice": true,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 709,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "def sel_min(xs):\n    m = xs[0]\n    for x in xs[1:]:\n        if x < m: m = x\n    return m\n\nprint(sel_min([3,1,2]))",
+      "answers": [
+        "1",
+        "2",
+        "3",
+        "Error"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 710,
+      "type": "Theory",
+      "question": "Which statement about greedy algorithms is true?",
+      "answers": [
+        "They make locally optimal choices",
+        "They always yield globally optimal solutions",
+        "They use backtracking extensively",
+        "They require dynamic programming"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 712,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "def part(xs):\n    pivot = xs[0]\n    left = [x for x in xs[1:] if x < pivot]\n    right = [x for x in xs[1:] if x >= pivot]\n    return left, pivot, right\n\nprint(part([3,1,4,2]))",
+      "answers": [
+        "([1,2], 3, [4])",
+        "([4], 3, [1,2])",
+        "([1,4], 3, [2])",
+        "Error"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 714,
+      "type": "Multiple Select",
+      "question": "Which statements about recursion are true? (Select all that apply)",
+      "answers": [
+        "Base case is required",
+        "Recursion can always be replaced by iteration",
+        "Python has recursion limits",
+        "Recursion is always faster"
+      ],
+      "answerScores": [0.33, 0.33, 0.34, -0.34],
+      "multipleChoice": true,
+      "topics": ["algorithms"]
+    },
+    {
+      "id": 715,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "def merge(a,b):\n    i=j=0; out=[]\n    while i<len(a) and j<len(b):\n        if a[i] <= b[j]: out.append(a[i]); i+=1\n        else: out.append(b[j]); j+=1\n    out += a[i:] + b[j:]\n    return out\n\nprint(merge([1,3],[2,4]))",
+      "answers": [
+        "[1,2,3,4]",
+        "[2,1,3,4]",
+        "[1,3,2,4]",
+        "Error"
+      ],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["algorithms"]
     }
   ]
 }
-

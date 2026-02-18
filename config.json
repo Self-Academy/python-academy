@@ -36,6 +36,11 @@
       "id": "standard-library",
       "name": "Standard Library",
       "icon": "📚"
+    },
+    {
+      "id": "debugging",
+      "name": "Debugging",
+      "icon": "🧩"
     }
   ],
   "questionFiles": [
@@ -46,7 +51,7 @@
     "questions/advanced.json",
     "questions/algorithms.json",
     "questions/standard-library.json",
-    "questions/mixed.json"
+    "questions/mixed.json",
+    "questions/debugging.json"
   ]
 }
-

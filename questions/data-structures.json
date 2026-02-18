@@ -86,7 +86,438 @@
       "answerScores": [-0.33, 1, 0.5, -0.33],
       "multipleChoice": false,
       "topics": ["data-structures"]
+    },
+    {
+      "id": 500,
+      "type": "Theory",
+      "question": "Which operation checks membership efficiently in a set?",
+      "answers": ["x in my_set", "my_set.index(x)", "my_set.has(x)", "contains(my_set, x)"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 501,
+      "type": "Multiple Select",
+      "question": "Which of the following are immutable? (Select all that apply)",
+      "answers": ["tuple", "list", "str", "set"],
+      "answerScores": [0.34, -0.34, 0.33, -0.33],
+      "multipleChoice": true,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 502,
+      "type": "Code Analysis",
+      "question": "What is the output?",
+      "code": "s = {1,2,2,3}\nprint(len(s))",
+      "answers": ["2", "3", "4", "Error"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 503,
+      "type": "Theory",
+      "question": "Which statement about dictionaries is true?",
+      "answers": ["They are ordered mappings", "They cannot be nested", "Keys must be integers", "Values must be strings"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 504,
+      "type": "Multiple Select",
+      "question": "Which list operations are valid? (Select all that apply)",
+      "answers": ["lst.append(x)", "lst.add(x)", "lst.extend([1,2])", "lst.pop()"],
+      "answerScores": [0.34, -0.34, 0.33, 0.33],
+      "multipleChoice": true,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 505,
+      "type": "Code Analysis",
+      "question": "What prints?",
+      "code": "d = {'a':1}\nd['b'] = 2\nprint(len(d))",
+      "answers": ["1", "2", "3", "Error"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 506,
+      "type": "Theory",
+      "question": "Which slicing returns the last two elements?",
+      "answers": ["arr[-2:]", "arr[len(arr)-2:]", "arr.slice(-2)", "All of the above"],
+      "answerScores": [1, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 507,
+      "type": "Code Analysis",
+      "question": "What is the output?",
+      "code": "a = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)",
+      "answers": ["[1, 2, 3]", "[1, 2, 3, 4]", "[4, 2, 3]", "Error"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 508,
+      "type": "Theory",
+      "question": "What does the pop() method return when used on a set?",
+      "answers": ["The first element", "The last element", "A random element", "Error"],
+      "answerScores": [-0.33, -0.33, 1, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 509,
+      "type": "Code Analysis",
+      "question": "What will be the output?",
+      "code": "s = {1, 2, 3}\ns.add(2)\ns.add(4)\nprint(s)",
+      "answers": ["{1, 2, 3}", "{1, 3, 4}", "{2, 4}", "Error"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 510,
+      "type": "Theory",
+      "question": "Which of the following is a valid way to create a dictionary?",
+      "answers": ["d = {}", "d = dict()", "Both a and b", "None of the above"],
+      "answerScores": [0.5, 0.5, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 511,
+      "type": "Code Analysis",
+      "question": "What does this code print?",
+      "code": "print(type({}))",
+      "answers": ["<class 'list'>", "<class 'dict'>", "<class 'set'>", "Error"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 512,
+      "type": "Theory",
+      "question": "How can you access the third element of a list named 'my_list'?",
+      "answers": ["my_list[2]", "my_list(2)", "my_list{3}", "my_list[3]"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 513,
+      "type": "Code Analysis",
+      "question": "What is the result of this code?",
+      "code": "my_list = [1, 2, 3]\nmy_list += [4, 5]\nprint(my_list)",
+      "answers": ["[1, 2, 3, 4, 5]", "[1, 2, 3, [4, 5]]", "Error", "None of the above"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 514,
+      "type": "Theory",
+      "question": "What is the main characteristic of a stack data structure?",
+      "answers": ["FIFO", "LIFO", "Random access", "Ordered"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 515,
+      "type": "Code Analysis",
+      "question": "What will be the output of this code?",
+      "code": "print({x: x**2 for x in (2, 3, 4)})",
+      "answers": ["{2: 4, 3: 9, 4: 16}", "{4, 9, 16}", "Error", "None of the above"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 516,
+      "type": "Theory",
+      "question": "Which of the following methods can be used to remove all items from a list?",
+      "answers": ["lst.clear()", "del lst", "lst = []", "All of the above"],
+      "answerScores": [0.33, 0.1, 0.34, -0.33],
+      "multipleChoice": true,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 517,
+      "type": "Code Analysis",
+      "question": "What is the output of this code?",
+      "code": "a = [1, 2, 3]\nb = a.copy()\nb.append(4)\nprint(a)",
+      "answers": ["[1, 2, 3]", "[1, 2, 3, 4]", "[4, 2, 3]", "Error"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 518,
+      "type": "Theory",
+      "question": "What will be the result of this code?",
+      "code": "s = {1, 2, 3}\ns.remove(2)\nprint(s)",
+      "answers": ["{1, 2, 3}", "{1, 3}", "{2, 3}", "Error"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 519,
+      "type": "Theory",
+      "question": "Which of the following is not a valid set operation?",
+      "answers": ["s.add(x)", "s.remove(x)", "s.index(x)", "s.union(t)"],
+      "answerScores": [-0.33, -0.33, 1, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 520,
+      "type": "Theory",
+      "question": "What is the default return value of the pop() method when used on a list with no index specified?",
+      "answers": ["The first element", "The last element", "None", "Error"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 521,
+      "type": "Theory",
+      "question": "Which of the following statements is true about Python tuples?",
+      "answers": ["They are mutable", "They are immutable", "They can only contain integers", "They are dynamic arrays"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 523,
+      "type": "Theory",
+      "question": "What is the result of this expression: (1, 2, 3) + (4, 5)?",
+      "answers": ["(5, 7)", "(1, 2, 3, 4, 5)", "Error", "None of the above"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 524,
+      "type": "Theory",
+      "question": "Which of the following is a characteristic of Python dictionaries?",
+      "answers": ["Ordered collections", "Indexed by integers", "Keys are unique", "All of the above"],
+      "answerScores": [-0.33, -0.33, 1, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 525,
+      "type": "Theory",
+      "question": "How do you create a shallow copy of a list in Python?",
+      "answers": ["lst.copy()", "copy(lst)", "lst[:]", "All of the above"],
+      "answerScores": [0.34, -0.33, 0.33, -0.33],
+      "multipleChoice": true,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 526,
+      "type": "Theory",
+      "question": "What will be the output of print(bool([]))?",
+      "answers": ["True", "False", "None", "Error"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 527,
+      "type": "Theory",
+      "question": "Which of the following operations will not modify the original list?",
+      "answers": ["lst.append(x)", "lst.remove(x)", "lst.sort()", "lst + [x]"],
+      "answerScores": [-0.33, -0.33, -0.33, 1],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 528,
+      "type": "Theory",
+      "question": "What is the result of [1, 2, 3] * 2?",
+      "answers": ["[1, 2, 3, 1, 2, 3]", "[2, 4, 6]", "Error", "None of the above"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 529,
+      "type": "Theory",
+      "question": "Which keyword is used to define a function in Python?",
+      "answers": ["func", "define", "def", "function"],
+      "answerScores": [-0.33, -0.33, 1, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 530,
+      "type": "Theory",
+      "question": "What is the purpose of the 'return' statement in a function?",
+      "answers": ["To exit the function", "To return a value", "Both a and b", "None of the above"],
+      "answerScores": [0.1, 1, 0.5, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 531,
+      "type": "Theory",
+      "question": "Which of the following is not a valid Python function definition?",
+      "answers": ["def myFunc[]:", "def myFunc():", "def myFunc(param):", "All of the above are valid"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 532,
+      "type": "Theory",
+      "question": "What is the scope of a variable?",
+      "answers": ["The area of memory allocated to the variable", "The part of the program where the variable is accessible", "Both a and b", "None of the above"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 533,
+      "type": "Theory",
+      "question": "Which of the following statements is true about Python lists?",
+      "answers": ["They are immutable", "They are ordered", "They can only contain similar data types", "All of the above"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 534,
+      "type": "Theory",
+      "question": "What is the result of len('Hello, World!')?",
+      "answers": ["13", "12", "11", "Error"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 535,
+      "type": "Theory",
+      "question": "Which of the following methods can be used to convert a string to lowercase?",
+      "answers": ["str.lower()", "str.toLowerCase()", "str.lcase()", "All of the above"],
+      "answerScores": [0.34, -0.33, -0.33, -0.33],
+      "multipleChoice": true,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 536,
+      "type": "Theory",
+      "question": "What will be the output of print('Hello' + 'World')?",
+      "answers": ["Hello World", "HelloWorld", "Error", "None of the above"],
+      "answerScores": [-0.33, 1, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 537,
+      "type": "Theory",
+      "question": "Which of the following is a valid Python comment?",
+      "answers": ["# This is a comment", "// This is a comment", "<!-- This is a comment -->", "All of the above"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 538,
+      "type": "Theory",
+      "question": "What is the purpose of the 'pass' statement in Python?",
+      "answers": ["To do nothing", "To pass control to the next iteration", "To exit a loop", "All of the above"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 540,
+      "type": "Theory",
+      "question": "What is the effect of the 'global' keyword inside a function?",
+      "answers": ["It declares a global variable", "It is the name of the unique global variable that exists in python and is only accessible through that keyword.", "It makes a global variable accessible in a local scope", "All of the above"],
+      "answerScores": [-0.33, -0.33, 1, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 541,
+      "type": "Theory",
+      "question": "Which of the following statements is true about Python sets?",
+      "answers": ["They are ordered", "They can contain duplicate elements", "They are mutable", "All of the above"],
+      "answerScores": [-0.33, -0.33, 1, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 542,
+      "type": "Theory",
+      "question": "What will be the output of print({1, 2, 3} - {2})?",
+      "answers": ["{1, 3}", "{1, 2, 3}", "{2}", "Error"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 543,
+      "type": "Theory",
+      "question": "Which of the following methods can be used to add an element to a set?",
+      "answers": ["s.add(x)", "s.append(x)", "s.insert(x)", "All of the above"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 544,
+      "type": "Theory",
+      "question": "What is the result of this expression: [1, 2] + [3, 4]?",
+      "answers": ["[1, 2, 3, 4]", "[4, 3, 2, 1]", "[1, 2] [3, 4]", "Error"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 545,
+      "type": "Theory",
+      "question": "Which of the following is not a valid way to create a set?",
+      "answers": ["s = {}", "s = set()", "s = set([])", "s = ()"],
+      "answerScores": [-0.33, 0.5, 0.5, 1],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 546,
+      "type": "Theory",
+      "question": "What will be the output of print('abc' * 3)?",
+      "answers": ["abcabcabc", "Error", "None of the above", "abc abc abc"],
+      "answerScores": [1, -0.33, -0.33, -0.33],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 547,
+      "type": "Theory",
+      "question": "Which of the following is a valid way to define a function that takes variable arguments?",
+      "answers": ["def myFunc(*args):", "def myFunc(args*):", "def myFunc(**args):", "def myFunc(args**):"],
+      "answerScores": [0.34, -0.33, 0.33, -0.33],
+      "multipleChoice": true,
+      "topics": ["data-structures"]
+    },
+    {
+      "id": 549,
+      "type": "Theory",
+      "question": "Which of the following is not a valid way to remove an element from a list?",
+      "answers": ["lst.remove(x)", "lst.pop()", "del lst[x]", "lst.delete(x)"],
+      "answerScores": [-0.33, -0.33, -0.33, 1],
+      "multipleChoice": false,
+      "topics": ["data-structures"]
     }
   ]
 }
-

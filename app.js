@@ -10,6 +10,7 @@ class PythonAcademy {
         this.userAnswers = [];
         this.answerDetails = [];
         this.topicScores = {};
+        this.unsureCount = 0; // Track number of unsure answers
 
         this.initializeApp();
     }
@@ -106,11 +107,11 @@ class PythonAcademy {
         const selectedQuestions = [];
         const usedQuestionIds = new Set();
 
-        // Step 1: Ensure minimum questions per topic
+        // Ensure minimum questions per topic for non-debugging topics
         this.config.topics.forEach(topic => {
+            if (topic.id === 'debugging') return; // skip here, handle later
             const topicQuestions = this.questionsByTopic[topic.id] || [];
             const shuffled = [...topicQuestions].sort(() => Math.random() - 0.5);
-
             let added = 0;
             for (const q of shuffled) {
                 if (!usedQuestionIds.has(q.id) && added < minPerTopic) {
@@ -121,18 +122,34 @@ class PythonAcademy {
             }
         });
 
-        // Step 2: Add more questions if below minimum total
-        const remainingQuestions = this.questions.filter(q => !usedQuestionIds.has(q.id));
+        // Add more questions if below minimum total (excluding debugging for now)
+        const remainingQuestions = this.questions.filter(q => !usedQuestionIds.has(q.id) && !q.topics.includes('debugging'));
         const shuffledRemaining = [...remainingQuestions].sort(() => Math.random() - 0.5);
-
         while (selectedQuestions.length < minTotal && shuffledRemaining.length > 0) {
             const q = shuffledRemaining.pop();
             selectedQuestions.push(q);
             usedQuestionIds.add(q.id);
         }
 
-        // Step 3: Shuffle to avoid same topics in a row (while maintaining some diversity)
-        return this.shuffleWithTopicDiversity(selectedQuestions);
+        // Append exactly one debugging question as last
+        const debuggingPool = this.questionsByTopic['debugging'] || [];
+        if (debuggingPool.length > 0) {
+            const dbg = [...debuggingPool].sort(() => Math.random() - 0.5)[0];
+            if (dbg && !usedQuestionIds.has(dbg.id)) {
+                selectedQuestions.push(dbg);
+                usedQuestionIds.add(dbg.id);
+            } else if (dbg) {
+                // If our random pick was already used (unlikely), find next unused
+                const alt = debuggingPool.find(d => !usedQuestionIds.has(d.id)) || dbg;
+                selectedQuestions.push(alt);
+            }
+        }
+
+        // Shuffle non-debugging portion with topic diversity, keep debugging last
+        const nonDebug = selectedQuestions.filter(q => !q.topics.includes('debugging'));
+        const withDiversity = this.shuffleWithTopicDiversity(nonDebug);
+        const finalList = withDiversity.concat(selectedQuestions.find(q => q.topics.includes('debugging')) || []);
+        return finalList;
     }
 
     shuffleWithTopicDiversity(questions) {
@@ -194,6 +211,24 @@ class PythonAcademy {
         // Display answers
         this.displayAnswers(question);
 
+        // Add unsure toggle
+        const container = document.getElementById('answers-container');
+        const unsureDiv = document.createElement('div');
+        unsureDiv.className = 'unsure-option';
+        const unsureInput = document.createElement('input');
+        unsureInput.type = 'checkbox';
+        unsureInput.id = 'unsure-checkbox';
+        const unsureLabel = document.createElement('label');
+        unsureLabel.htmlFor = 'unsure-checkbox';
+        unsureLabel.textContent = "I'm not sure";
+        unsureInput.addEventListener('change', () => {
+            // Enable submit button even if unsure selected
+            document.getElementById('submit-answer-btn').disabled = false;
+        });
+        unsureDiv.appendChild(unsureInput);
+        unsureDiv.appendChild(unsureLabel);
+        container.appendChild(unsureDiv);
+
         // Disable submit button until answer is selected
         document.getElementById('submit-answer-btn').disabled = true;
     }
@@ -209,18 +244,26 @@ class PythonAcademy {
         const isMultiSelect = question.multipleChoice || false;
         const inputType = isMultiSelect ? 'checkbox' : 'radio';
 
-        question.answers.forEach((answer, index) => {
+        // Build a shuffled list of indices to randomize display order
+        const indices = question.answers.map((_, idx) => idx);
+        const shuffled = [...indices].sort(() => Math.random() - 0.5);
+        // Store for potential debugging or future features
+        this.currentAnswerOrder = shuffled;
+
+        shuffled.forEach((originalIndex) => {
+            const answer = question.answers[originalIndex];
             const optionDiv = document.createElement('div');
             optionDiv.className = 'answer-option';
 
             const input = document.createElement('input');
             input.type = inputType;
             input.name = 'answer';
-            input.id = `answer-${index}`;
-            input.value = index;
+            input.id = `answer-${originalIndex}`;
+            // Important: keep the original index as the value so scoring maps correctly
+            input.value = originalIndex;
 
             const label = document.createElement('label');
-            label.htmlFor = `answer-${index}`;
+            label.htmlFor = `answer-${originalIndex}`;
             label.textContent = answer;
 
             optionDiv.addEventListener('click', (e) => {
@@ -274,6 +317,7 @@ class PythonAcademy {
         const question = this.selectedQuestions[this.currentQuestionIndex];
         const selectedAnswers = Array.from(document.querySelectorAll('input[name="answer"]:checked'))
             .map(input => parseInt(input.value));
+        const unsureChecked = !!document.getElementById('unsure-checkbox')?.checked;
 
         this.userAnswers.push(selectedAnswers);
 
@@ -285,12 +329,19 @@ class PythonAcademy {
             userAnswers: selectedAnswers,
             score: scoreResult.score,
             isFullyCorrect: correctnessResult.isFullyCorrect,
-            isPartiallyCorrect: correctnessResult.isPartiallyCorrect
+            isPartiallyCorrect: correctnessResult.isPartiallyCorrect,
+            isUnsure: unsureChecked
         });
 
+        if (unsureChecked) {
+            this.unsureCount += 1;
+        }
+
+        // Update scores for all topics this question contributes to
+        const maxPoints = this.getMaxPointsForQuestion(question);
         question.topics.forEach(topicId => {
             if (this.topicScores[topicId]) {
-                this.topicScores[topicId].total += 1;
+                this.topicScores[topicId].total += maxPoints;
                 this.topicScores[topicId].score += scoreResult.score;
             }
         });
@@ -306,11 +357,9 @@ class PythonAcademy {
 
     /**
      * Determine if answer is fully correct, partially correct, or incorrect.
-     *
-     * @param {Object} question - The question object
-     * @param {number} score - The calculated score (0-1)
-     * @param {Array} selectedAnswers - Array of selected answer indices
-     * @returns {Object} Object with isFullyCorrect and isPartiallyCorrect booleans
+     * For non-multipleChoice: score <= 0 => incorrect; 0 < score < 1 => partial; score === 1 => correct
+     * For multipleChoice: fully correct if all positives selected and no negatives selected;
+     *                     incorrect if all negatives selected and no positives selected; else partial
      */
     determineCorrectness(question, score, selectedAnswers) {
         if (question.multipleChoice) {
@@ -324,14 +373,14 @@ class PythonAcademy {
             const selectedCorrect = selectedAnswers.filter(idx => correctIndices.includes(idx)).length;
             const selectedIncorrect = selectedAnswers.filter(idx => incorrectIndices.includes(idx)).length;
 
-            const allCorrectSelected = selectedCorrect === correctIndices.length;
+            const allCorrectSelected = selectedCorrect === correctIndices.length && correctIndices.length > 0;
             const noIncorrectSelected = selectedIncorrect === 0;
 
             if (allCorrectSelected && noIncorrectSelected) {
                 return { isFullyCorrect: true, isPartiallyCorrect: false };
             }
 
-            const allIncorrectSelected = selectedIncorrect === incorrectIndices.length;
+            const allIncorrectSelected = selectedIncorrect === incorrectIndices.length && incorrectIndices.length > 0;
             const noCorrectSelected = selectedCorrect === 0;
 
             if (allIncorrectSelected && noCorrectSelected) {
@@ -341,24 +390,21 @@ class PythonAcademy {
             return { isFullyCorrect: false, isPartiallyCorrect: true };
         }
 
-        if (score >= 0.99) {
+        if (score === 1) {
             return { isFullyCorrect: true, isPartiallyCorrect: false };
         }
-
-        if (score > 0.01) {
+        if (score > 0 && score < 1) {
             return { isFullyCorrect: false, isPartiallyCorrect: true };
         }
-
         return { isFullyCorrect: false, isPartiallyCorrect: false };
     }
 
     /**
-     * Calculate the score for a question based on selected answers.
-     * Simply sums the scores of selected answers, then clamps to 0-1 range.
-     *
-     * @param {Object} question - The question object with answerScores array
-     * @param {Array} selectedAnswers - Array of selected answer indices
-     * @returns {Object} Object with score property (0-1 range)
+     * Calculate raw score for a question based on selected answers.
+     * - Non-multipleChoice: raw score equals the selected answer's score (or 0 if none).
+     * - MultipleChoice: per answer rule
+     *   - positive score: add score if selected, subtract score if NOT selected (penalty for missing correct)
+     *   - negative score: add negative score if selected (penalty), add absolute value if NOT selected (credit for avoiding wrong)
      */
     calculateScore(question, selectedAnswers) {
         if (!question.answerScores) {
@@ -368,16 +414,50 @@ class PythonAcademy {
             return { score: isCorrect ? 1 : 0 };
         }
 
-        if (selectedAnswers.length === 0) {
-            return { score: 0 };
+        if (!question.multipleChoice) {
+            if (selectedAnswers.length === 0) {
+                return { score: 0 };
+            }
+            const selectedScore = question.answerScores[selectedAnswers[0]] ?? 0;
+            return { score: selectedScore };
         }
 
-        let earnedScore = 0;
-        selectedAnswers.forEach(idx => {
-            earnedScore += question.answerScores[idx];
+        // MultipleChoice (updated rule):
+        // - Add raw scores of all selected answers (positives and negatives as-is)
+        // - Subtract the positive scores for any correct answers that were NOT selected
+        let total = 0;
+        question.answerScores.forEach((ansScore, idx) => {
+            const isSelected = selectedAnswers.includes(idx);
+            if (isSelected) {
+                total += ansScore; // raw score
+            } else if (ansScore > 0) {
+                total -= ansScore; // missed correct answer => penalty
+            }
+            // If ansScore < 0 and not selected => no reward
+            // If ansScore === 0 => no effect
         });
+        return { score: total };
+    }
 
-        return { score: Math.max(0, Math.min(1, earnedScore)) };
+    /**
+     * Compute the maximum obtainable points for a question.
+     * - Non-multipleChoice: the largest positive score in answerScores (or 0 if none).
+     * - MultipleChoice: sum of all positive scores + sum of absolute values of negative scores.
+     */
+    getMaxPointsForQuestion(question) {
+        if (!question.answerScores) {
+            // legacy
+            const correctAnswers = question.correctAnswers || [question.correctAnswer];
+            return correctAnswers.length; // legacy assumes 1 point per question
+        }
+        if (!question.multipleChoice) {
+            const positives = question.answerScores.filter(s => s > 0);
+            return positives.length ? Math.max(...positives) : 0;
+        }
+        // Multi-select max is achieved by selecting all positives and no negatives.
+        // No reward for avoiding negatives.
+        const positivesSum = question.answerScores.reduce((sum, s) => s > 0 ? sum + s : sum, 0);
+        return positivesSum;
     }
 
     /**
@@ -400,7 +480,8 @@ class PythonAcademy {
         overallDiv.innerHTML = `
             <h3>Overall Score</h3>
             <div class="score-value">${overallPercentage}%</div>
-            <p>${totalScore.toFixed(1)} out of ${totalPossible} points</p>
+            <p>${totalScore.toFixed(2)} out of ${totalPossible.toFixed(2)} points</p>
+            <p>Unsure answers: ${this.unsureCount}</p>
         `;
 
         this.displayTopicScores();
@@ -430,7 +511,7 @@ class PythonAcademy {
                         ${percentage}%
                     </div>
                 </div>
-                <p>${score.score.toFixed(1)}/${score.total} points (${percentage}%)</p>
+                <p>${score.score.toFixed(2)}/${score.total.toFixed(2)} points (${percentage}%)</p>
                 <p class="feedback">${feedback}</p>
             `;
 
@@ -519,10 +600,11 @@ class PythonAcademy {
 
         const question = detail.question;
         const userAnswers = detail.userAnswers;
-        const userScore = detail.score;
+        const userScore = detail.score; // raw points
+        const maxPoints = this.getMaxPointsForQuestion(question);
 
         let html = `
-            <h4>Question ${index + 1} - Score: ${(userScore * 100).toFixed(0)}%</h4>
+            <h4>Question ${index + 1} - Score: ${userScore.toFixed(2)} / ${maxPoints.toFixed(2)} points (${maxPoints > 0 ? Math.round((userScore / maxPoints) * 100) : 0}%)</h4>
             <div class="question-info">
                 <span class="question-type">${question.type || 'Theory'}</span>
                 <p><strong>${question.question}</strong></p>
@@ -592,13 +674,18 @@ class PythonAcademy {
 
         html += `</ul>`;
 
-        const scorePercent = (userScore * 100).toFixed(0);
+        const scorePercent = maxPoints > 0 ? Math.round((userScore / maxPoints) * 100) : 0;
         if (detail.isFullyCorrect) {
             html += `<p style="color: var(--success-color); font-weight: bold; margin-top: 15px;">✓ Perfect! You earned ${scorePercent}% (${userScore.toFixed(2)} points)</p>`;
         } else if (detail.isPartiallyCorrect) {
             html += `<p style="color: var(--warning-color); font-weight: bold; margin-top: 15px;">⚠ Partially correct - You earned ${scorePercent}% (${userScore.toFixed(2)} points)</p>`;
         } else {
             html += `<p style="color: var(--danger-color); font-weight: bold; margin-top: 15px;">✗ Incorrect - You earned ${scorePercent}% (${userScore.toFixed(2)} points)</p>`;
+        }
+
+        // Append unsure note if applicable
+        if (detail.isUnsure) {
+            html += `<p style="margin-top:8px;color:#335;">Marked as unsure</p>`;
         }
 
         detailContainer.innerHTML = html;
@@ -629,4 +716,3 @@ class PythonAcademy {
 document.addEventListener('DOMContentLoaded', () => {
     new PythonAcademy();
 });
-
