@@ -148,7 +148,7 @@
       "id": 315,
       "type": "Code Analysis",
       "question": "What does this code print?",
-      "code": "import json\ntry:\n    print(json.loads('{\"a\":1}\"'))\nexcept json.JSONDecodeError:\n    print('bad')",
+      "code": "import json\ntry:\n    print(json.loads('{\"a\":1}'))\nexcept json.JSONDecodeError:\n    print('bad')",
       "answers": ["{'a': 1}", "bad", "Error", "None"],
       "answerScores": [1, -0.33, -0.33, -0.33],
       "multipleChoice": false,
